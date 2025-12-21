@@ -95,13 +95,19 @@ body {
 }
 
 header {
-  background-color: var(--color-surface);
+  background-color: var(--color-primary-light);
   box-shadow: var(--shadow-sm);
   padding: var(--space-sm) 0;
   margin-bottom: var(--space-md);
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+body.dark-mode header {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
 }
 
 header .container {
