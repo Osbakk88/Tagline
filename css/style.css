@@ -398,8 +398,9 @@ nav ul {
   flex-direction: column; /* Stack on mobile */
   gap: 0.5rem;
   padding: var(--space-sm) 0;
-  margin: 0;
-  align-items: center;
+  margin: 0 auto;
+  align-items: stretch;
+  max-width: 400px;
 }
 
 /* @media (min-width: 900px) {
@@ -431,7 +432,15 @@ nav a {
   border-radius: 50px;
   transition: all 0.2s ease;
   font-size: 1.25rem; /* Larger font size */
-  display: block; /* Full width click area on mobile */
+  display: flex; /* Flex for alignment */
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  gap: 1rem;
+}
+
+nav a i {
+  width: 32px; /* Fixed width for icons to align text */
   text-align: center;
 }
 
