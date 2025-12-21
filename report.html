@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="app.title">Huskelista</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      @media print {
+        header,
+        nav,
+        .no-print {
+          display: none !important;
+        }
+        body {
+          background: white;
+          color: black;
+        }
+        .card {
+          box-shadow: none;
+          border: 1px solid #ccc;
+          break-inside: avoid;
+        }
+        .container {
+          max-width: 100%;
+          margin: 0;
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+          "
+        >
+          <h1 data-i18n="nav.report">Doctor's Report</h1>
+          <nav>
+            <ul>
+              <li>
+                <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+              </li>
+              <li>
+                <a href="appointments.html" data-i18n="nav.appointments"
+                  >Appointments</a
+                >
+              </li>
+              <li>
+                <a href="medications.html" data-i18n="nav.medications"
+                  >Medications</a
+                >
+              </li>
+              <li>
+                <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
+              </li>
+              <li><a href="vitals.html" data-i18n="nav.vitals">Vitals</a></li>
+              <li>
+                <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
+              </li>
+              <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
+              <li>
+                <a href="documents.html" data-i18n="nav.documents">Documents</a>
+              </li>
+              <li>
+                <a href="report.html" class="active" data-i18n="nav.report"
+                  >Report</a
+                >
+              </li>
+              <li>
+                <a href="profile.html" data-i18n="nav.profile">Profile</a>
+              </li>
+              <li>
+                <a href="settings.html" data-i18n="nav.settings">Settings</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="card no-print">
+          <h2 data-i18n="report.settings">Report Settings</h2>
+          <div
+            style="
+              display: flex;
+              gap: var(--space-md);
+              align-items: end;
+              flex-wrap: wrap;
+            "
+          >
+            <div>
+              <label for="range" data-i18n="report.range">Time Range</label>
+              <select id="range">
+                <option value="30" data-i18n="report.range.30">
+                  Last 30 Days
+                </option>
+                <option value="90" data-i18n="report.range.90">
+                  Last 3 Months
+                </option>
+                <option value="365" data-i18n="report.range.365">
+                  Last Year
+                </option>
+                <option value="all" data-i18n="report.range.all">
+                  All Time
+                </option>
+              </select>
+            </div>
+            <button id="print-btn" class="btn" data-i18n="report.print">
+              Print Report
+            </button>
+          </div>
+        </section>
+
+        <div id="report-content">
+          <!-- Report sections will be generated here -->
+        </div>
+      </main>
+    </div>
+
+    <script type="module">
+      import { Appointments } from "./js/modules/appointments.js";
+      import { Medications } from "./js/modules/medications.js";
+      import { Symptoms } from "./js/modules/symptoms.js";
+      import { Vitals } from "./js/modules/vitals.js";
+      import { Notes } from "./js/modules/notes.js";
+      import { I18n } from "./js/modules/i18n.js";
+
+      const rangeSelect = document.getElementById("range");
+      const printBtn = document.getElementById("print-btn");
+      const content = document.getElementById("report-content");
+
+      function filterByDate(items, days) {
+        if (days === "all") return items;
+        const cutoff = new Date();
+        cutoff.setDate(cutoff.getDate() - parseInt(days));
+        return items.filter((item) => {
+          const date = item.date || item.timestamp; // Handle different date field names if any
+          return new Date(date) >= cutoff;
+        });
+      }
+
+      function renderSection(title, items, renderer) {
+        if (items.length === 0) return "";
+        return `
+                <section class="card">
+                    <h2>${title}</h2>
+                    <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+                        ${items.map(renderer).join("")}
+                    </div>
+                </section>
+            `;
+      }
+
+      function render() {
+        const days = rangeSelect.value;
+
+        // Medications (Always show all active)
+        const meds = Medications.getAll();
+        const medsHtml = renderSection(
+          I18n.get("nav.medications"),
+          meds,
+          (m) => `
+                <div style="border-bottom: 1px solid #eee; padding-bottom: 8px;">
+                    <strong>${m.name}</strong> - ${I18n.get(
+            "medications.schedule." + m.schedule
+          )}
+                </div>
+            `
+        );
+
+        // Symptoms
+        const symptoms = filterByDate(Symptoms.getAll(), days);
+        const symptomsHtml = renderSection(
+          I18n.get("nav.symptoms"),
+          symptoms,
+          (s) => `
+                <div style="border-bottom: 1px solid #eee; padding-bottom: 8px;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <strong>${s.name}</strong>
+                        <span>${new Date(s.date).toLocaleDateString()}</span>
+                    </div>
+                    <div>${I18n.get("symptoms.label.severity")}: ${I18n.get(
+            "symptoms.severity." + s.severity
+          )}</div>
+                    ${s.notes ? `<div>${s.notes}</div>` : ""}
+                </div>
+            `
+        );
+
+        // Vitals
+        const vitals = filterByDate(Vitals.getAll(), days);
+        const vitalsHtml = renderSection(
+          I18n.get("nav.vitals"),
+          vitals,
+          (v) => `
+                <div style="border-bottom: 1px solid #eee; padding-bottom: 8px;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <strong>${I18n.get("vitals.type." + v.type)}</strong>
+                        <span>${new Date(v.date).toLocaleDateString()}</span>
+                    </div>
+                    <div>${v.value}</div>
+                    ${v.notes ? `<div>${v.notes}</div>` : ""}
+                </div>
+            `
+        );
+
+        // Appointments (Past only)
+        const allAppointments = Appointments.getAll();
+        const pastAppointments = allAppointments.filter(
+          (a) => new Date(a.date) < new Date()
+        );
+        const filteredAppointments = filterByDate(pastAppointments, days);
+        const appointmentsHtml = renderSection(
+          I18n.get("nav.appointments") + " (Past)",
+          filteredAppointments,
+          (a) => `
+                <div style="border-bottom: 1px solid #eee; padding-bottom: 8px;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <strong>${a.title}</strong>
+                        <span>${new Date(a.date).toLocaleDateString()}</span>
+                    </div>
+                    <div>${a.location}</div>
+                    ${a.notes ? `<div>${a.notes}</div>` : ""}
+                </div>
+            `
+        );
+
+        content.innerHTML = `
+                <div style="margin-bottom: var(--space-lg);">
+                    <h1>${I18n.get("report.title")}</h1>
+                    <p>${I18n.get(
+                      "report.generated"
+                    )}: ${new Date().toLocaleDateString()}</p>
+                </div>
+                ${medsHtml}
+                ${symptomsHtml}
+                ${vitalsHtml}
+                ${appointmentsHtml}
+            `;
+      }
+
+      rangeSelect.addEventListener("change", render);
+      printBtn.addEventListener("click", () => window.print());
+
+      window.addEventListener("languageChanged", render);
+
+      render();
+    </script>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

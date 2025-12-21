@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Huskelista</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="container">
+          <h1 data-i18n="app.title">Huskelista</h1>
+          <nav>
+            <ul>
+              <li>
+                <a
+                  href="dashboard.html"
+                  class="active"
+                  data-i18n="nav.dashboard"
+                  >Dashboard</a
+                >
+              </li>
+              <li>
+                <a href="appointments.html" data-i18n="nav.appointments"
+                  >Appointments</a
+                >
+              </li>
+              <li>
+                <a href="medications.html" data-i18n="nav.medications"
+                  >Medications</a
+                >
+              </li>
+              <li>
+                <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
+              </li>
+              <li><a href="vitals.html" data-i18n="nav.vitals">Vitals</a></li>
+              <li>
+                <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
+              </li>
+              <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
+              <li>
+                <a href="documents.html" data-i18n="nav.documents">Documents</a>
+              </li>
+              <li><a href="report.html" data-i18n="nav.report">Report</a></li>
+              <li>
+                <a href="profile.html" data-i18n="nav.profile">Profile</a>
+              </li>
+              <li>
+                <a href="settings.html" data-i18n="nav.settings">Settings</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main class="dashboard-grid">
+        <section class="card">
+          <h2 data-i18n="dashboard.upcoming">Upcoming Appointments</h2>
+          <div id="upcoming-appointments-list">
+            <!-- JS will populate this -->
+            <p style="color: var(--color-text-muted)" data-i18n="loading">
+              Loading...
+            </p>
+          </div>
+          <div class="mt-md">
+            <a
+              href="appointments.html"
+              class="btn btn--secondary"
+              data-i18n="dashboard.view_all_appointments"
+              >View All Appointments</a
+            >
+          </div>
+        </section>
+
+        <section class="card">
+          <h2 data-i18n="dashboard.recent_notes">Recent Notes</h2>
+          <div id="recent-notes-list">
+            <!-- JS will populate this -->
+            <p style="color: var(--color-text-muted)" data-i18n="loading">
+              Loading...
+            </p>
+          </div>
+          <div class="mt-md">
+            <a
+              href="notes.html"
+              class="btn btn--secondary"
+              data-i18n="dashboard.view_all_notes"
+              >View All Notes</a
+            >
+          </div>
+        </section>
+
+        <section class="card" style="grid-column: 1 / -1">
+          <h2 data-i18n="dashboard.resources">External Resources</h2>
+          <p
+            style="
+              color: var(--color-text-muted);
+              margin-bottom: var(--space-md);
+            "
+            data-i18n="dashboard.resources_desc"
+          >
+            Quick access to public health services.
+          </p>
+          <div class="resource-links">
+            <a
+              href="https://www.helsenorge.no"
+              target="_blank"
+              class="btn"
+              style="background-color: #9b0032; border-color: #9b0032"
+            >
+              Helsenorge.no ↗
+            </a>
+            <a
+              href="https://www.nav.no"
+              target="_blank"
+              class="btn"
+              style="background-color: #c30000; border-color: #c30000"
+            >
+              NAV.no ↗
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module">
+      import { Appointments } from "./js/modules/appointments.js";
+      import { Notes } from "./js/modules/notes.js";
+      import { I18n } from "./js/modules/i18n.js";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // Load Appointments
+        const appointments = Appointments.getAll();
+        const appList = document.getElementById("upcoming-appointments-list");
+
+        if (appointments.length === 0) {
+          appList.innerHTML = `<p>${I18n.get("dashboard.no_appointments")}</p>`;
+        } else {
+          // Show next 3
+          const nextApps = appointments.slice(0, 3);
+          appList.innerHTML = nextApps
+            .map(
+              (app) => `
+                    <div class="card">
+                        <h3>${app.title}</h3>
+                        <p><strong>${I18n.get(
+                          "appointments.label.date"
+                        )}:</strong> ${new Date(
+                app.date
+              ).toLocaleDateString()} at ${new Date(
+                app.date
+              ).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}</p>
+                        <p>${app.location || ""}</p>
+                    </div>
+                `
+            )
+            .join("");
+        }
+
+        // Load Notes
+        const notes = Notes.getAll();
+        const noteList = document.getElementById("recent-notes-list");
+
+        if (notes.length === 0) {
+          noteList.innerHTML = `<p>${I18n.get("dashboard.no_notes")}</p>`;
+        } else {
+          const recentNotes = notes.slice(0, 3);
+          noteList.innerHTML = recentNotes
+            .map(
+              (note) => `
+                    <div class="card">
+                        <p>${note.content.substring(0, 100)}${
+                note.content.length > 100 ? "..." : ""
+              }</p>
+                        <small style="color: var(--color-text-muted);">Added: ${new Date(
+                          note.createdAt
+                        ).toLocaleDateString()}</small>
+                    </div>
+                `
+            )
+            .join("");
+        }
+      });
+    </script>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

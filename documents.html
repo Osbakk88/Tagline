@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documents - Huskelista</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      .modal-backdrop.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .modal-content {
+        background: var(--color-surface);
+        padding: var(--space-md);
+        border-radius: var(--border-radius);
+        max-width: 90%;
+        max-height: 90%;
+        width: 800px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-sm);
+      }
+      .modal-body {
+        flex: 1;
+        overflow: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f0f0f0;
+        border-radius: 4px;
+        min-height: 300px;
+      }
+      .modal-body img {
+        max-width: 100%;
+        max-height: 70vh;
+        object-fit: contain;
+      }
+      .modal-body iframe {
+        width: 100%;
+        height: 70vh;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+          "
+        >
+          <h1 data-i18n="nav.documents">Documents</h1>
+          <nav>
+            <ul>
+              <li>
+                <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+              </li>
+              <li>
+                <a href="appointments.html" data-i18n="nav.appointments"
+                  >Appointments</a
+                >
+              </li>
+              <li>
+                <a href="medications.html" data-i18n="nav.medications"
+                  >Medications</a
+                >
+              </li>
+              <li>
+                <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
+              </li>
+              <li>
+                <a href="vitals.html" data-i18n="nav.vitals">Vitals</a>
+              </li>
+              <li>
+                <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
+              </li>
+              <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
+              <li>
+                <a
+                  href="documents.html"
+                  class="active"
+                  data-i18n="nav.documents"
+                  >Documents</a
+                >
+              </li>
+              <li>
+                <a href="report.html" data-i18n="nav.report">Report</a>
+              </li>
+              <li>
+                <a href="profile.html" data-i18n="nav.profile">Profile</a>
+              </li>
+              <li>
+                <a href="settings.html" data-i18n="nav.settings">Settings</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="card">
+          <h2 data-i18n="documents.upload">Upload Document</h2>
+          <p
+            style="
+              font-size: 0.9rem;
+              color: var(--color-text-muted);
+              margin-bottom: var(--space-sm);
+            "
+            data-i18n="documents.warning"
+          >
+            Note: Files are stored in your browser. Large files may not be
+            saved.
+          </p>
+          <form id="add-document-form">
+            <label for="name" data-i18n="documents.label.name"
+              >Document Name</label
+            >
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder="e.g. Hospital Letter Jan 2025"
+              data-i18n-placeholder="documents.placeholder.name"
+            />
+
+            <label for="category" data-i18n="documents.label.category"
+              >Category</label
+            >
+            <select id="category" name="category">
+              <option value="General" data-i18n="documents.category.general">
+                General
+              </option>
+              <option value="Hospital" data-i18n="documents.category.hospital">
+                Hospital
+              </option>
+              <option value="NAV" data-i18n="documents.category.nav">
+                NAV
+              </option>
+              <option
+                value="Prescriptions"
+                data-i18n="documents.category.prescriptions"
+              >
+                Prescriptions
+              </option>
+            </select>
+
+            <label for="file" data-i18n="documents.label.file"
+              >File (Image or PDF)</label
+            >
+            <input
+              type="file"
+              id="file"
+              name="file"
+              accept="image/*,application/pdf"
+              required
+            />
+
+            <button type="submit" class="btn" data-i18n="documents.btn.save">
+              Save Document
+            </button>
+          </form>
+        </section>
+
+        <section>
+          <h2 data-i18n="documents.stored">Stored Documents</h2>
+          <div id="documents-list">
+            <!-- List will be populated here -->
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="document-modal" class="modal-backdrop">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modal-title">Document View</h3>
+          <button
+            class="btn btn--secondary"
+            onclick="window.closeModal()"
+            data-i18n="btn.close"
+          >
+            Close
+          </button>
+        </div>
+        <div class="modal-body" id="modal-body">
+          <!-- Content will be injected here -->
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { Documents } from "./js/modules/documents.js";
+      import { I18n } from "./js/modules/i18n.js";
+
+      const form = document.getElementById("add-document-form");
+      const list = document.getElementById("documents-list");
+      const modal = document.getElementById("document-modal");
+      const modalBody = document.getElementById("modal-body");
+      const modalTitle = document.getElementById("modal-title");
+
+      function render() {
+        const docs = Documents.getAll();
+        if (docs.length === 0) {
+          list.innerHTML = `<p>${I18n.get("documents.none")}</p>`;
+          return;
+        }
+
+        list.innerHTML = docs
+          .map(
+            (doc) => `
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3>${doc.name}</h3>
+                            <span style="background: var(--color-bg); padding: 2px 8px; border-radius: 4px; font-size: 0.9rem;">${
+                              I18n.get(
+                                "documents.category." +
+                                  doc.category.toLowerCase()
+                              ) || doc.category
+                            }</span>
+                            <p style="margin-top: var(--space-xs);"><small>Added: ${new Date(
+                              doc.createdAt
+                            ).toLocaleDateString()}</small></p>
+                        </div>
+                        <div style="display: flex; gap: var(--space-sm);">
+                            ${
+                              doc.fileData
+                                ? `<button class="btn" onclick="window.viewDocument('${
+                                    doc.id
+                                  }')">${I18n.get("btn.view")}</button>
+                                   <a href="${doc.fileData}" download="${
+                                    doc.name
+                                  }" class="btn btn--secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">${I18n.get(
+                                    "btn.download"
+                                  )}</a>`
+                                : ""
+                            }
+                            <button class="btn btn--secondary" onclick="window.deleteDocument('${
+                              doc.id
+                            }')" aria-label="Delete document">${I18n.get(
+              "btn.delete"
+            )}</button>
+                        </div>
+                    </div>
+                </div>
+            `
+          )
+          .join("");
+      }
+
+      window.viewDocument = (id) => {
+        const docs = Documents.getAll();
+        const doc = docs.find((d) => d.id === id);
+        if (!doc) return;
+
+        modalTitle.textContent = doc.name;
+
+        if (doc.type.startsWith("image/")) {
+          modalBody.innerHTML = `<img src="${doc.fileData}" alt="${doc.name}">`;
+        } else if (doc.type === "application/pdf") {
+          modalBody.innerHTML = `<iframe src="${doc.fileData}"></iframe>`;
+        } else {
+          modalBody.innerHTML = `<p>Cannot preview this file type.</p>`;
+        }
+
+        modal.classList.add("active");
+      };
+
+      window.closeModal = () => {
+        modal.classList.remove("active");
+        modalBody.innerHTML = "";
+      };
+
+      // Close on backdrop click
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          window.closeModal();
+        }
+      });
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const fileInput = document.getElementById("file");
+        const file = fileInput.files[0];
+
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (evt) {
+            const fileData = evt.target.result;
+            // Basic size check for LocalStorage (approx 5MB limit usually)
+            if (fileData.length > 3000000) {
+              alert(I18n.get("documents.alert.too_large"));
+              return;
+            }
+
+            Documents.add({
+              name: document.getElementById("name").value,
+              category: document.getElementById("category").value,
+              fileData: fileData,
+              type: file.type,
+            });
+            form.reset();
+            render();
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      window.deleteDocument = (id) => {
+        if (confirm(I18n.get("documents.confirm_delete"))) {
+          Documents.delete(id);
+          render();
+        }
+      };
+
+      render();
+    </script>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

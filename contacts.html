@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="app.title">Huskelista</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+          "
+        >
+          <h1 data-i18n="nav.contacts">Care Team</h1>
+          <nav>
+            <ul>
+              <li>
+                <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+              </li>
+              <li>
+                <a href="appointments.html" data-i18n="nav.appointments"
+                  >Appointments</a
+                >
+              </li>
+              <li>
+                <a href="medications.html" data-i18n="nav.medications"
+                  >Medications</a
+                >
+              </li>
+              <li>
+                <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
+              </li>
+              <li><a href="vitals.html" data-i18n="nav.vitals">Vitals</a></li>
+              <li>
+                <a href="contacts.html" class="active" data-i18n="nav.contacts"
+                  >Contacts</a
+                >
+              </li>
+              <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
+              <li>
+                <a href="documents.html" data-i18n="nav.documents">Documents</a>
+              </li>
+              <li><a href="report.html" data-i18n="nav.report">Report</a></li>
+              <li>
+                <a href="profile.html" data-i18n="nav.profile">Profile</a>
+              </li>
+              <li>
+                <a href="settings.html" data-i18n="nav.settings">Settings</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="card">
+          <h2 data-i18n="contacts.add_new">Add Contact</h2>
+          <form id="add-contact-form">
+            <label for="name" data-i18n="contacts.label.name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder="e.g. Dr. Smith"
+              data-i18n-placeholder="contacts.placeholder.name"
+            />
+
+            <label for="role" data-i18n="contacts.label.role"
+              >Role / Specialty</label
+            >
+            <input
+              type="text"
+              id="role"
+              name="role"
+              required
+              placeholder="e.g. GP, Cardiologist"
+              data-i18n-placeholder="contacts.placeholder.role"
+            />
+
+            <div
+              style="
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-md);
+              "
+            >
+              <div>
+                <label for="phone" data-i18n="contacts.label.phone"
+                  >Phone</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="123 45 678"
+                  data-i18n-placeholder="contacts.placeholder.phone"
+                />
+              </div>
+              <div>
+                <label for="email" data-i18n="contacts.label.email"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="doctor@clinic.com"
+                  data-i18n-placeholder="contacts.placeholder.email"
+                />
+              </div>
+            </div>
+
+            <label for="notes" data-i18n="contacts.label.notes">Notes</label>
+            <textarea
+              id="notes"
+              name="notes"
+              rows="2"
+              placeholder="e.g. Opening hours..."
+              data-i18n-placeholder="contacts.placeholder.notes"
+            ></textarea>
+
+            <button type="submit" class="btn" data-i18n="contacts.btn.add">
+              Save Contact
+            </button>
+          </form>
+        </section>
+
+        <section>
+          <h2 data-i18n="contacts.my_team">My Care Team</h2>
+          <div
+            id="contacts-list"
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+              gap: var(--space-md);
+            "
+          >
+            <!-- List will be populated here -->
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module">
+      import { Contacts } from "./js/modules/contacts.js";
+      import { I18n } from "./js/modules/i18n.js";
+
+      const form = document.getElementById("add-contact-form");
+      const list = document.getElementById("contacts-list");
+
+      function render() {
+        const items = Contacts.getAll();
+        if (items.length === 0) {
+          list.innerHTML = `<p style="grid-column: 1/-1;">${I18n.get(
+            "contacts.none"
+          )}</p>`;
+          return;
+        }
+
+        list.innerHTML = items
+          .map(
+            (item) => `
+                <div class="card" style="margin-bottom: 0; height: 100%; display: flex; flex-direction: column;">
+                    <div style="flex: 1;">
+                        <h3 style="margin-bottom: var(--space-xs);">${
+                          item.name
+                        }</h3>
+                        <span style="background: var(--color-bg); padding: 2px 8px; border-radius: 4px; font-size: 0.9rem; color: var(--color-primary); font-weight: bold;">${
+                          item.role
+                        }</span>
+                        
+                        <div style="margin-top: var(--space-sm);">
+                            ${
+                              item.phone
+                                ? `<p>📞 <a href="tel:${item.phone}">${item.phone}</a></p>`
+                                : ""
+                            }
+                            ${
+                              item.email
+                                ? `<p>✉️ <a href="mailto:${item.email}">${item.email}</a></p>`
+                                : ""
+                            }
+                        </div>
+                        
+                        ${
+                          item.notes
+                            ? `<p style="margin-top: var(--space-sm); font-size: 0.9rem; color: var(--color-text-muted);">${item.notes}</p>`
+                            : ""
+                        }
+                    </div>
+                    <div style="margin-top: var(--space-md); text-align: right;">
+                        <button class="btn btn--secondary" onclick="window.deleteContact('${
+                          item.id
+                        }')" aria-label="Delete" style="padding: 0.4rem 0.8rem;">
+                            ${I18n.get("btn.delete")}
+                        </button>
+                    </div>
+                </div>
+            `
+          )
+          .join("");
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        Contacts.add({
+          name: document.getElementById("name").value,
+          role: document.getElementById("role").value,
+          phone: document.getElementById("phone").value,
+          email: document.getElementById("email").value,
+          notes: document.getElementById("notes").value,
+        });
+        form.reset();
+        render();
+      });
+
+      window.deleteContact = (id) => {
+        if (confirm(I18n.get("contacts.confirm_delete"))) {
+          Contacts.delete(id);
+          render();
+        }
+      };
+
+      // Re-render when language changes
+      window.addEventListener("languageChanged", () => {
+        render();
+      });
+
+      render();
+    </script>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

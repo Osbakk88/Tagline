@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointments - Huskelista</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="container">
+          <h1 data-i18n="nav.appointments">Appointments</h1>
+          <nav>
+            <ul>
+              <li>
+                <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+              </li>
+              <li>
+                <a
+                  href="appointments.html"
+                  class="active"
+                  data-i18n="nav.appointments"
+                  >Appointments</a
+                >
+              </li>
+              <li>
+                <a href="medications.html" data-i18n="nav.medications"
+                  >Medications</a
+                >
+              </li>
+              <li>
+                <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
+              </li>
+              <li><a href="vitals.html" data-i18n="nav.vitals">Vitals</a></li>
+              <li>
+                <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
+              </li>
+              <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
+              <li>
+                <a href="documents.html" data-i18n="nav.documents">Documents</a>
+              </li>
+              <li><a href="report.html" data-i18n="nav.report">Report</a></li>
+              <li>
+                <a href="profile.html" data-i18n="nav.profile">Profile</a>
+              </li>
+              <li>
+                <a href="settings.html" data-i18n="nav.settings">Settings</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="card">
+          <h2 data-i18n="appointments.add_new">Add New Appointment</h2>
+          <form id="add-appointment-form">
+            <label for="title" data-i18n="appointments.label.title"
+              >Title</label
+            >
+            <input
+              type="text"
+              id="title"
+              name="title"
+              required
+              placeholder="e.g. Doctor Smith"
+              data-i18n-placeholder="appointments.placeholder.title"
+            />
+
+            <label for="date" data-i18n="appointments.label.date"
+              >Date & Time</label
+            >
+            <input type="datetime-local" id="date" name="date" required />
+
+            <label for="location" data-i18n="appointments.label.location"
+              >Location</label
+            >
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder="e.g. City Hospital, Room 302"
+              data-i18n-placeholder="appointments.placeholder.location"
+            />
+
+            <label for="notes" data-i18n="appointments.label.notes"
+              >Things to remember / ask</label
+            >
+            <textarea
+              id="notes"
+              name="notes"
+              rows="3"
+              placeholder="Questions for the doctor..."
+              data-i18n-placeholder="appointments.placeholder.notes"
+            ></textarea>
+
+            <button type="submit" class="btn" data-i18n="appointments.btn.add">
+              Add Appointment
+            </button>
+          </form>
+
+          <div
+            style="
+              margin-top: var(--space-xl);
+              padding-top: var(--space-md);
+              border-top: 1px solid #eee;
+            "
+          >
+            <h3 data-i18n="appointments.import">Import from Calendar</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                color: var(--color-text-muted);
+                margin-bottom: var(--space-sm);
+              "
+              data-i18n="appointments.import_desc"
+            >
+              Upload an .ics file to add appointments automatically.
+            </p>
+            <input
+              type="file"
+              id="ics-input"
+              accept=".ics"
+              style="display: none"
+            />
+            <button
+              class="btn btn--secondary"
+              onclick="document.getElementById('ics-input').click()"
+              data-i18n="appointments.btn_import"
+            >
+              Select .ics File
+            </button>
+            <span
+              id="import-status"
+              style="margin-left: var(--space-sm); font-size: 0.9rem"
+            ></span>
+          </div>
+        </section>
+
+        <section>
+          <h2 data-i18n="appointments.upcoming">Upcoming</h2>
+          <div id="appointments-list">
+            <!-- List will be populated here -->
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module">
+      import { Appointments } from "./js/modules/appointments.js";
+      import { I18n } from "./js/modules/i18n.js";
+
+      const form = document.getElementById("add-appointment-form");
+      const list = document.getElementById("appointments-list");
+
+      function render() {
+        const appointments = Appointments.getAll();
+        if (appointments.length === 0) {
+          list.innerHTML = `<p>${I18n.get("appointments.none")}</p>`;
+          return;
+        }
+
+        list.innerHTML = appointments
+          .map(
+            (app) => `
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div>
+                            <h3>${app.title}</h3>
+                            <p><strong>${I18n.get(
+                              "appointments.label.date"
+                            )}:</strong> ${new Date(
+              app.date
+            ).toLocaleString()}</p>
+                            <p><strong>${I18n.get(
+                              "appointments.label.location"
+                            )}:</strong> ${
+              app.location || "No location specified"
+            }</p>
+                            ${
+                              app.notes
+                                ? `<p style="margin-top: var(--space-sm); background: var(--color-bg); padding: var(--space-sm); border-radius: 4px;"><strong>Note:</strong> ${app.notes}</p>`
+                                : ""
+                            }
+                        </div>
+                        <button class="btn btn--secondary" onclick="window.deleteAppointment('${
+                          app.id
+                        }')" aria-label="Delete appointment">${I18n.get(
+              "btn.delete"
+            )}</button>
+                    </div>
+                </div>
+            `
+          )
+          .join("");
+      }
+
+      // ICS Import Logic
+      const icsInput = document.getElementById("ics-input");
+      const importStatus = document.getElementById("import-status");
+
+      icsInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            const content = event.target.result;
+            const events = parseICS(content);
+            if (events.length > 0) {
+              Appointments.addBatch(events);
+              render();
+              importStatus.textContent = `${events.length} appointments imported!`;
+              importStatus.style.color = "var(--color-primary)";
+            } else {
+              importStatus.textContent = "No events found in file.";
+              importStatus.style.color = "orange";
+            }
+          } catch (err) {
+            console.error(err);
+            importStatus.textContent = "Error parsing file.";
+            importStatus.style.color = "red";
+          }
+          // Reset input
+          icsInput.value = "";
+          setTimeout(() => (importStatus.textContent = ""), 5000);
+        };
+        reader.readAsText(file);
+      });
+
+      function parseICS(content) {
+        const events = [];
+        const lines = content.split(/\r\n|\n|\r/);
+        let inEvent = false;
+        let currentEvent = {};
+
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          if (line.startsWith("BEGIN:VEVENT")) {
+            inEvent = true;
+            currentEvent = {};
+          } else if (line.startsWith("END:VEVENT")) {
+            inEvent = false;
+            if (currentEvent.title && currentEvent.date) {
+              events.push(currentEvent);
+            }
+          } else if (inEvent) {
+            if (line.startsWith("SUMMARY:"))
+              currentEvent.title = line.substring(8);
+            else if (line.startsWith("LOCATION:"))
+              currentEvent.location = line.substring(9);
+            else if (line.startsWith("DESCRIPTION:"))
+              currentEvent.notes = line.substring(12);
+            else if (line.startsWith("DTSTART")) {
+              // Handle DTSTART;VALUE=DATE: or DTSTART:
+              const parts = line.split(":");
+              const dateStr = parts[parts.length - 1];
+              // Basic ISO parsing YYYYMMDDTHHMMSS
+              if (dateStr.length >= 8) {
+                const y = dateStr.substring(0, 4);
+                const m = dateStr.substring(4, 6);
+                const d = dateStr.substring(6, 8);
+                let h = "09",
+                  min = "00"; // Default time if date-only
+                if (dateStr.includes("T")) {
+                  const timePart = dateStr.split("T")[1];
+                  h = timePart.substring(0, 2);
+                  min = timePart.substring(2, 4);
+                }
+                currentEvent.date = `${y}-${m}-${d}T${h}:${min}`;
+              }
+            }
+          }
+        }
+        return events;
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        Appointments.add({
+          title: formData.get("title"),
+          date: formData.get("date"),
+          location: formData.get("location"),
+          notes: formData.get("notes"),
+        });
+        form.reset();
+        render();
+      });
+
+      // Expose delete function to window for onclick
+      window.deleteAppointment = (id) => {
+        if (confirm(I18n.get("appointments.confirm_delete"))) {
+          Appointments.delete(id);
+          render();
+        }
+      };
+
+      render();
+    </script>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

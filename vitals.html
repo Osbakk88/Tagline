@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="app.title">Huskelista</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+          "
+        >
+          <h1 data-i18n="nav.vitals">Vitals</h1>
+          <nav>
+            <ul>
+              <li>
+                <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+              </li>
+              <li>
+                <a href="appointments.html" data-i18n="nav.appointments"
+                  >Appointments</a
+                >
+              </li>
+              <li>
+                <a href="medications.html" data-i18n="nav.medications"
+                  >Medications</a
+                >
+              </li>
+              <li>
+                <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
+              </li>
+              <li>
+                <a href="vitals.html" class="active" data-i18n="nav.vitals"
+                  >Vitals</a
+                >
+              </li>
+              <li>
+                <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
+              </li>
+              <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
+              <li>
+                <a href="documents.html" data-i18n="nav.documents">Documents</a>
+              </li>
+              <li><a href="report.html" data-i18n="nav.report">Report</a></li>
+              <li>
+                <a href="profile.html" data-i18n="nav.profile">Profile</a>
+              </li>
+              <li>
+                <a href="settings.html" data-i18n="nav.settings">Settings</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="card">
+          <h2 data-i18n="vitals.log_new">Log Vital Sign</h2>
+          <form id="add-vital-form">
+            <label for="type" data-i18n="vitals.label.type">Type</label>
+            <select id="type" name="type" required>
+              <option
+                value="blood_pressure"
+                data-i18n="vitals.type.blood_pressure"
+              >
+                Blood Pressure
+              </option>
+              <option value="heart_rate" data-i18n="vitals.type.heart_rate">
+                Heart Rate
+              </option>
+              <option value="weight" data-i18n="vitals.type.weight">
+                Weight
+              </option>
+              <option value="temperature" data-i18n="vitals.type.temperature">
+                Temperature
+              </option>
+              <option value="blood_sugar" data-i18n="vitals.type.blood_sugar">
+                Blood Sugar
+              </option>
+            </select>
+
+            <div
+              style="
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-md);
+              "
+            >
+              <div>
+                <label for="value" data-i18n="vitals.label.value">Value</label>
+                <input
+                  type="text"
+                  id="value"
+                  name="value"
+                  required
+                  placeholder="e.g. 120/80"
+                  data-i18n-placeholder="vitals.placeholder.value"
+                />
+              </div>
+              <div>
+                <label for="date" data-i18n="vitals.label.date"
+                  >Date & Time</label
+                >
+                <input type="datetime-local" id="date" name="date" required />
+              </div>
+            </div>
+
+            <label for="notes" data-i18n="vitals.label.notes">Notes</label>
+            <textarea
+              id="notes"
+              name="notes"
+              rows="2"
+              placeholder="e.g. Before breakfast..."
+              data-i18n-placeholder="vitals.placeholder.notes"
+            ></textarea>
+
+            <button type="submit" class="btn" data-i18n="vitals.btn.add">
+              Log Entry
+            </button>
+          </form>
+        </section>
+
+        <section>
+          <h2 data-i18n="vitals.history">History</h2>
+          <div
+            id="vitals-list"
+            style="display: flex; flex-direction: column; gap: var(--space-sm)"
+          >
+            <!-- List will be populated here -->
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module">
+      import { Vitals } from "./js/modules/vitals.js";
+      import { I18n } from "./js/modules/i18n.js";
+
+      const form = document.getElementById("add-vital-form");
+      const list = document.getElementById("vitals-list");
+
+      // Set default date to now
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+      document.getElementById("date").value = now.toISOString().slice(0, 16);
+
+      function getUnit(type) {
+        switch (type) {
+          case "blood_pressure":
+            return "mmHg";
+          case "heart_rate":
+            return "bpm";
+          case "weight":
+            return "kg";
+          case "temperature":
+            return "°C";
+          case "blood_sugar":
+            return "mmol/L";
+          default:
+            return "";
+        }
+      }
+
+      function render() {
+        const items = Vitals.getAll();
+        if (items.length === 0) {
+          list.innerHTML = `<p>${I18n.get("vitals.none")}</p>`;
+          return;
+        }
+
+        list.innerHTML = items
+          .map((item) => {
+            const date = new Date(item.date).toLocaleString(
+              I18n.currentLang === "no" ? "no-NO" : "en-GB",
+              {
+                weekday: "short",
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+              }
+            );
+
+            const typeLabel = I18n.get(`vitals.type.${item.type}`);
+            const unit = getUnit(item.type);
+
+            return `
+                <div class="card" style="margin-bottom: 0; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-weight: bold; font-size: 1.1rem;">
+                            ${typeLabel}: <span style="color: var(--color-primary);">${
+              item.value
+            } ${unit}</span>
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--color-text-muted); margin-top: 4px;">
+                            ${date}
+                        </div>
+                        ${
+                          item.notes
+                            ? `<div style="font-size: 0.9rem; margin-top: 4px;">${item.notes}</div>`
+                            : ""
+                        }
+                    </div>
+                    <button class="btn btn--secondary" onclick="window.deleteVital('${
+                      item.id
+                    }')" aria-label="Delete" style="padding: 0.4rem 0.8rem;">
+                        ${I18n.get("btn.delete")}
+                    </button>
+                </div>
+            `;
+          })
+          .join("");
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        Vitals.add({
+          type: document.getElementById("type").value,
+          value: document.getElementById("value").value,
+          date: document.getElementById("date").value,
+          notes: document.getElementById("notes").value,
+        });
+        form.reset();
+
+        // Reset date to now
+        const now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        document.getElementById("date").value = now.toISOString().slice(0, 16);
+
+        render();
+      });
+
+      window.deleteVital = (id) => {
+        if (confirm(I18n.get("vitals.confirm_delete"))) {
+          Vitals.delete(id);
+          render();
+        }
+      };
+
+      // Re-render when language changes
+      window.addEventListener("languageChanged", () => {
+        render();
+      });
+
+      render();
+    </script>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="app.title">Huskelista</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* Specific styles for symptom cards to look like buttons/tiles */
+      .symptom-card {
+        background: var(--color-surface);
+        padding: var(--space-md);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        border: 2px solid transparent;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-sm);
+      }
+
+      .symptom-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--color-primary);
+      }
+
+      .severity-badge {
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .severity-mild {
+        background-color: #e6f4ea;
+        color: #1e8e3e;
+      }
+      .severity-moderate {
+        background-color: #fef7e0;
+        color: #f9ab00;
+      }
+      .severity-severe {
+        background-color: #fce8e6;
+        color: #d93025;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+          "
+        >
+          <h1 data-i18n="nav.symptoms">Symptoms</h1>
+          <nav>
+            <ul>
+              <li>
+                <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+              </li>
+              <li>
+                <a href="appointments.html" data-i18n="nav.appointments"
+                  >Appointments</a
+                >
+              </li>
+              <li>
+                <a href="medications.html" data-i18n="nav.medications"
+                  >Medications</a
+                >
+              </li>
+              <li>
+                <a href="symptoms.html" class="active" data-i18n="nav.symptoms"
+                  >Symptoms</a
+                >
+              </li>
+              <li>
+                <a href="vitals.html" data-i18n="nav.vitals">Vitals</a>
+              </li>
+              <li>
+                <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
+              </li>
+              <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
+              <li>
+                <a href="documents.html" data-i18n="nav.documents">Documents</a>
+              </li>
+              <li>
+                <a href="report.html" data-i18n="nav.report">Report</a>
+              </li>
+              <li>
+                <a href="profile.html" data-i18n="nav.profile">Profile</a>
+              </li>
+              <li>
+                <a href="settings.html" data-i18n="nav.settings">Settings</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="card">
+          <h2 data-i18n="symptoms.add_new">Log Symptom</h2>
+          <form id="add-symptom-form">
+            <label for="name" data-i18n="symptoms.label.name">Symptom</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder="e.g. Headache"
+              data-i18n-placeholder="symptoms.placeholder.name"
+            />
+
+            <div
+              style="
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-md);
+              "
+            >
+              <div>
+                <label for="date" data-i18n="symptoms.label.date"
+                  >Date & Time</label
+                >
+                <input type="datetime-local" id="date" name="date" required />
+              </div>
+              <div>
+                <label for="severity" data-i18n="symptoms.label.severity"
+                  >Severity</label
+                >
+                <select id="severity" name="severity">
+                  <option value="mild" data-i18n="symptoms.severity.mild">
+                    Mild
+                  </option>
+                  <option
+                    value="moderate"
+                    data-i18n="symptoms.severity.moderate"
+                  >
+                    Moderate
+                  </option>
+                  <option value="severe" data-i18n="symptoms.severity.severe">
+                    Severe
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <label for="notes" data-i18n="symptoms.label.notes"
+              >Notes / Triggers</label
+            >
+            <textarea
+              id="notes"
+              name="notes"
+              rows="2"
+              placeholder="e.g. After eating..."
+              data-i18n-placeholder="symptoms.placeholder.notes"
+            ></textarea>
+
+            <button type="submit" class="btn" data-i18n="symptoms.btn.add">
+              Log Symptom
+            </button>
+          </form>
+        </section>
+
+        <section>
+          <h2 data-i18n="symptoms.recent">Recent Symptoms</h2>
+          <div id="symptoms-list">
+            <!-- List will be populated here -->
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module">
+      import { Symptoms } from "./js/modules/symptoms.js";
+      import { I18n } from "./js/modules/i18n.js";
+
+      const form = document.getElementById("add-symptom-form");
+      const list = document.getElementById("symptoms-list");
+
+      // Set default date to now
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+      document.getElementById("date").value = now.toISOString().slice(0, 16);
+
+      function render() {
+        const items = Symptoms.getAll();
+        if (items.length === 0) {
+          list.innerHTML = `<p>${I18n.get("symptoms.none")}</p>`;
+          return;
+        }
+
+        list.innerHTML = items
+          .map(
+            (item) => `
+                <div class="symptom-card" onclick="this.classList.toggle('expanded')">
+                    <div style="flex: 1;">
+                        <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);">
+                            <h3 style="margin: 0;">${item.name}</h3>
+                            <span class="severity-badge severity-${
+                              item.severity
+                            }">${I18n.get(
+              "symptoms.severity." + item.severity
+            )}</span>
+                        </div>
+                        <p style="font-size: 0.9rem; color: var(--color-text-muted);">
+                            ${new Date(item.date).toLocaleString()}
+                        </p>
+                        ${
+                          item.notes
+                            ? `<p style="margin-top: var(--space-xs); font-style: italic;">"${item.notes}"</p>`
+                            : ""
+                        }
+                    </div>
+                    <button class="btn btn--secondary" onclick="event.stopPropagation(); window.deleteSymptom('${
+                      item.id
+                    }')" aria-label="Delete" style="padding: 0.4rem 0.8rem;">
+                        ${I18n.get("btn.delete")}
+                    </button>
+                </div>
+            `
+          )
+          .join("");
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        Symptoms.add({
+          name: document.getElementById("name").value,
+          date: document.getElementById("date").value,
+          severity: document.getElementById("severity").value,
+          notes: document.getElementById("notes").value,
+        });
+        form.reset();
+        // Reset date to now
+        const now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        document.getElementById("date").value = now.toISOString().slice(0, 16);
+
+        render();
+      });
+
+      window.deleteSymptom = (id) => {
+        if (confirm(I18n.get("symptoms.confirm_delete"))) {
+          Symptoms.delete(id);
+          render();
+        }
+      };
+
+      // Re-render when language changes
+      window.addEventListener("languageChanged", () => {
+        render();
+      });
+
+      render();
+    </script>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
