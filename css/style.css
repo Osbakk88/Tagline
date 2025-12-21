@@ -312,6 +312,29 @@ select:focus {
   margin-top: 2px;
 }
 
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.lang-toggle {
+  background: transparent;
+  border: 2px solid var(--color-header-text);
+  color: var(--color-header-text);
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.lang-toggle:hover {
+  background: var(--color-header-text);
+  color: var(--color-header-bg);
+}
+
 .hamburger {
   display: flex;
   flex-direction: column;
