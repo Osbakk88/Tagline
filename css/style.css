@@ -327,13 +327,13 @@ nav ul {
 } */
 
 nav a {
-  color: var(--color-text-muted);
+  color: var(--color-text); /* Darker text for better visibility */
   text-decoration: none;
-  font-weight: var(--font-weight-medium);
-  padding: 0.75rem 1.25rem;
+  font-weight: var(--font-weight-bold); /* Bolder text */
+  padding: 1rem 1.5rem; /* Larger touch target */
   border-radius: 50px;
   transition: all 0.2s ease;
-  font-size: 1rem;
+  font-size: 1.25rem; /* Larger font size */
   display: block; /* Full width click area on mobile */
   text-align: center;
 }
