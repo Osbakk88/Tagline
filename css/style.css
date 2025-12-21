@@ -4,10 +4,10 @@
   --color-surface: #ffffff;
   --color-text: #102a43; /* Deep navy for better contrast */
   --color-text-muted: #627d98;
-  --color-primary: #00695c; /* Deep Teal - Trustworthy & Calm */
-  --color-primary-hover: #004d40;
-  --color-primary-light: #e0f2f1; /* Very light teal */
-  --color-header-bg: #F2D399; /* Warm yellow/orange for header */
+  --color-primary: #5d4037; /* Warm Brown */
+  --color-primary-hover: #3e2723;
+  --color-primary-light: #d7ccc8; /* Light brown */
+  --color-header-bg: #f2d399; /* Warm yellow/orange for header */
   --color-header-text: #5d4037; /* Warm dark brown */
   --color-secondary: #486581;
   --color-border: #d9e2ec;
@@ -106,7 +106,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 body.dark-mode header {
@@ -281,12 +281,12 @@ select:focus {
 .brand img {
   width: 72px;
   height: 72px;
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
   transition: filter 0.2s ease;
 }
 
 .brand:hover img {
-  filter: drop-shadow(0 6px 8px rgba(0,0,0,0.15));
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.15));
 }
 
 .brand__text {
