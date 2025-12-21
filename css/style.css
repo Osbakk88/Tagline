@@ -109,13 +109,13 @@ header .container {
   gap: var(--space-sm);
 }
 
-@media (min-width: 900px) {
+/* @media (min-width: 900px) {
   header .container {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
-}
+} */
 
 h1, h2, h3 {
   color: var(--color-text);
@@ -305,13 +305,13 @@ nav ul {
   align-items: center;
 }
 
-@media (min-width: 900px) {
+/* @media (min-width: 900px) {
   .hamburger {
     display: none;
   }
 
   nav {
-    display: block; /* Always show on desktop */
+    display: block; 
     width: auto;
   }
 
@@ -324,7 +324,7 @@ nav ul {
   .header-top {
     width: auto;
   }
-}
+} */
 
 nav a {
   color: var(--color-text-muted);
