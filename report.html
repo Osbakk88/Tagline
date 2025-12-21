@@ -33,7 +33,13 @@
     <header>
       <div class="container">
         <div class="header-top">
-          <h1 data-i18n="nav.report">Doctor's Report</h1>
+          <a class="brand" href="index.html" aria-label="Tagline home">
+            <img src="assets/logo-icon.svg" alt="" width="32" height="32" />
+            <span class="brand__text">
+                <span class="brand__name" data-i18n="app.title">Tagline</span>
+                <span class="brand__tagline" data-i18n="app.slogan">Alt samlet. Ett sted.</span>
+            </span>
+          </a>
           <button class="hamburger" aria-label="Menu">
             <span></span>
             <span></span>
@@ -83,6 +89,7 @@
     </header>
 
     <main class="container">
+      <h2 data-i18n="nav.report">Doctor's Report</h2>
       <section class="card no-print">
         <h2 data-i18n="report.settings">Report Settings</h2>
         <div

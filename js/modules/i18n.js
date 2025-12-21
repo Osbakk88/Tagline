@@ -19,6 +19,7 @@ const translations = {
 
         // General
         'app.title': 'Tagline',
+        'app.slogan': 'Everything gathered. One place.',
         'btn.delete': 'Delete',
         'btn.download': 'Download',
         'btn.view': 'View',
@@ -206,6 +207,7 @@ const translations = {
 
         // General
         'app.title': 'Tagline',
+        'app.slogan': 'Alt samlet. Ett sted.',
         'btn.delete': 'Slett',
         'btn.download': 'Last ned',
         'btn.view': 'Vis',
