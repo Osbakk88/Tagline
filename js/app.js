@@ -5,7 +5,7 @@ import { Storage } from "./modules/storage.js";
 import { I18n } from "./modules/i18n.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Huskelista App Initialized");
+  console.log("Tagline App Initialized");
 
   // Initialize I18n
   I18n.init();
@@ -27,4 +27,15 @@ document.addEventListener("DOMContentLoaded", () => {
       link.setAttribute("aria-current", "page");
     }
   });
+
+  // Hamburger Menu Toggle
+  const hamburger = document.querySelector('.hamburger');
+  const nav = document.querySelector('nav');
+
+  if (hamburger && nav) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+  }
 });
