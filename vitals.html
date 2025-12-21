@@ -7,138 +7,128 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="container">
-      <header>
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--space-sm);
-          "
-        >
-          <h1 data-i18n="nav.vitals">Vitals</h1>
-          <nav>
-            <ul>
-              <li>
-                <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
-              </li>
-              <li>
-                <a href="appointments.html" data-i18n="nav.appointments"
-                  >Appointments</a
-                >
-              </li>
-              <li>
-                <a href="medications.html" data-i18n="nav.medications"
-                  >Medications</a
-                >
-              </li>
-              <li>
-                <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
-              </li>
-              <li>
-                <a href="vitals.html" class="active" data-i18n="nav.vitals"
-                  >Vitals</a
-                >
-              </li>
-              <li>
-                <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
-              </li>
-              <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
-              <li>
-                <a href="documents.html" data-i18n="nav.documents">Documents</a>
-              </li>
-              <li><a href="report.html" data-i18n="nav.report">Report</a></li>
-              <li>
-                <a href="profile.html" data-i18n="nav.profile">Profile</a>
-              </li>
-              <li>
-                <a href="settings.html" data-i18n="nav.settings">Settings</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-
-      <main>
-        <section class="card">
-          <h2 data-i18n="vitals.log_new">Log Vital Sign</h2>
-          <form id="add-vital-form">
-            <label for="type" data-i18n="vitals.label.type">Type</label>
-            <select id="type" name="type" required>
-              <option
-                value="blood_pressure"
-                data-i18n="vitals.type.blood_pressure"
+    <header>
+      <div class="container">
+        <h1 data-i18n="nav.vitals">Vitals</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+            </li>
+            <li>
+              <a href="appointments.html" data-i18n="nav.appointments"
+                >Appointments</a
               >
-                Blood Pressure
-              </option>
-              <option value="heart_rate" data-i18n="vitals.type.heart_rate">
-                Heart Rate
-              </option>
-              <option value="weight" data-i18n="vitals.type.weight">
-                Weight
-              </option>
-              <option value="temperature" data-i18n="vitals.type.temperature">
-                Temperature
-              </option>
-              <option value="blood_sugar" data-i18n="vitals.type.blood_sugar">
-                Blood Sugar
-              </option>
-            </select>
+            </li>
+            <li>
+              <a href="medications.html" data-i18n="nav.medications"
+                >Medications</a
+              >
+            </li>
+            <li>
+              <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
+            </li>
+            <li>
+              <a href="vitals.html" class="active" data-i18n="nav.vitals"
+                >Vitals</a
+              >
+            </li>
+            <li>
+              <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
+            </li>
+            <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
+            <li>
+              <a href="documents.html" data-i18n="nav.documents">Documents</a>
+            </li>
+            <li><a href="report.html" data-i18n="nav.report">Report</a></li>
+            <li>
+              <a href="profile.html" data-i18n="nav.profile">Profile</a>
+            </li>
+            <li>
+              <a href="settings.html" data-i18n="nav.settings">Settings</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-            <div
-              style="
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: var(--space-md);
-              "
+    <main class="container">
+      <section class="card">
+        <h2 data-i18n="vitals.log_new">Log Vital Sign</h2>
+        <form id="add-vital-form">
+          <label for="type" data-i18n="vitals.label.type">Type</label>
+          <select id="type" name="type" required>
+            <option
+              value="blood_pressure"
+              data-i18n="vitals.type.blood_pressure"
             >
-              <div>
-                <label for="value" data-i18n="vitals.label.value">Value</label>
-                <input
-                  type="text"
-                  id="value"
-                  name="value"
-                  required
-                  placeholder="e.g. 120/80"
-                  data-i18n-placeholder="vitals.placeholder.value"
-                />
-              </div>
-              <div>
-                <label for="date" data-i18n="vitals.label.date"
-                  >Date & Time</label
-                >
-                <input type="datetime-local" id="date" name="date" required />
-              </div>
-            </div>
+              Blood Pressure
+            </option>
+            <option value="heart_rate" data-i18n="vitals.type.heart_rate">
+              Heart Rate
+            </option>
+            <option value="weight" data-i18n="vitals.type.weight">
+              Weight
+            </option>
+            <option value="temperature" data-i18n="vitals.type.temperature">
+              Temperature
+            </option>
+            <option value="blood_sugar" data-i18n="vitals.type.blood_sugar">
+              Blood Sugar
+            </option>
+          </select>
 
-            <label for="notes" data-i18n="vitals.label.notes">Notes</label>
-            <textarea
-              id="notes"
-              name="notes"
-              rows="2"
-              placeholder="e.g. Before breakfast..."
-              data-i18n-placeholder="vitals.placeholder.notes"
-            ></textarea>
-
-            <button type="submit" class="btn" data-i18n="vitals.btn.add">
-              Log Entry
-            </button>
-          </form>
-        </section>
-
-        <section>
-          <h2 data-i18n="vitals.history">History</h2>
           <div
-            id="vitals-list"
-            style="display: flex; flex-direction: column; gap: var(--space-sm)"
+            style="
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: var(--space-md);
+            "
           >
-            <!-- List will be populated here -->
+            <div>
+              <label for="value" data-i18n="vitals.label.value">Value</label>
+              <input
+                type="text"
+                id="value"
+                name="value"
+                required
+                placeholder="e.g. 120/80"
+                data-i18n-placeholder="vitals.placeholder.value"
+              />
+            </div>
+            <div>
+              <label for="date" data-i18n="vitals.label.date"
+                >Date & Time</label
+              >
+              <input type="datetime-local" id="date" name="date" required />
+            </div>
           </div>
-        </section>
-      </main>
-    </div>
+
+          <label for="notes" data-i18n="vitals.label.notes">Notes</label>
+          <textarea
+            id="notes"
+            name="notes"
+            rows="2"
+            placeholder="e.g. Before breakfast..."
+            data-i18n-placeholder="vitals.placeholder.notes"
+          ></textarea>
+
+          <button type="submit" class="btn" data-i18n="vitals.btn.add">
+            Log Entry
+          </button>
+        </form>
+      </section>
+
+      <section>
+        <h2 data-i18n="vitals.history">History</h2>
+        <div
+          id="vitals-list"
+          style="display: flex; flex-direction: column; gap: var(--space-sm)"
+        >
+          <!-- List will be populated here -->
+        </div>
+      </section>
+    </main>
 
     <script type="module">
       import { Vitals } from "./js/modules/vitals.js";

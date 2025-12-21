@@ -7,100 +7,137 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="container">
-      <header>
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-sm);">
-                <h1 data-i18n="nav.settings">Settings</h1>
-                <nav>
-                    <ul>
-                        <li><a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a></li>
-                        <li><a href="appointments.html" data-i18n="nav.appointments">Appointments</a></li>
-                        <li><a href="medications.html" data-i18n="nav.medications">Medications</a></li>
-                        <li><a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a></li>
-                        <li><a href="vitals.html" data-i18n="nav.vitals">Vitals</a></li>
-                        <li><a href="contacts.html" data-i18n="nav.contacts">Contacts</a></li>
-                        <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
-                        <li><a href="documents.html" data-i18n="nav.documents">Documents</a></li>
-                        <li><a href="report.html" data-i18n="nav.report">Report</a></li>
-                        <li><a href="profile.html" data-i18n="nav.profile">Profile</a></li>
-                        <li><a href="settings.html" class="active" data-i18n="nav.settings">Settings</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>              <main>
-            <section class="card">
-                <h2 data-i18n="settings.language">Language</h2>
-                <div style="margin-top: var(--space-sm);">
-                    <select id="language-select">
-                        <option value="en">English</option>
-                        <option value="no">Norsk</option>
-                    </select>
-                </div>
-            </section>
+    <header>
+      <div class="container">
+        <h1 data-i18n="nav.settings">Settings</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+            </li>
+            <li>
+              <a href="appointments.html" data-i18n="nav.appointments"
+                >Appointments</a
+              >
+            </li>
+            <li>
+              <a href="medications.html" data-i18n="nav.medications"
+                >Medications</a
+              >
+            </li>
+            <li>
+              <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
+            </li>
+            <li><a href="vitals.html" data-i18n="nav.vitals">Vitals</a></li>
+            <li>
+              <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
+            </li>
+            <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
+            <li>
+              <a href="documents.html" data-i18n="nav.documents">Documents</a>
+            </li>
+            <li><a href="report.html" data-i18n="nav.report">Report</a></li>
+            <li><a href="profile.html" data-i18n="nav.profile">Profile</a></li>
+            <li>
+              <a href="settings.html" class="active" data-i18n="nav.settings"
+                >Settings</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-            <section class="card">
-                <h2 data-i18n="settings.appearance">Appearance</h2>
-                <div style="margin-top: var(--space-sm); display: flex; align-items: center; gap: var(--space-sm);">
-                    <label for="theme-toggle" data-i18n="settings.dark_mode">Dark Mode</label>
-                    <input type="checkbox" id="theme-toggle">
-                </div>
-            </section>
+    <main class="container">
+      <section class="card">
+        <h2 data-i18n="settings.language">Language</h2>
+        <div style="margin-top: var(--space-sm)">
+          <select id="language-select">
+            <option value="en">English</option>
+            <option value="no">Norsk</option>
+          </select>
+        </div>
+      </section>
 
-            <section class="card">
-                <h2 data-i18n="settings.data_management">Data Management</h2>
-                <p data-i18n="settings.data_info">
-                    All your data is stored locally on this device.
-                </p>
-                <div style="margin-top: var(--space-md);">
-                    <button id="clear-data-btn" class="btn" style="background-color: var(--color-error);" data-i18n="settings.btn.clear">Clear All Data</button>
-                </div>
-            </section>
+      <section class="card">
+        <h2 data-i18n="settings.appearance">Appearance</h2>
+        <div
+          style="
+            margin-top: var(--space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+          "
+        >
+          <label for="theme-toggle" data-i18n="settings.dark_mode"
+            >Dark Mode</label
+          >
+          <input type="checkbox" id="theme-toggle" />
+        </div>
+      </section>
 
-            <section class="card">
-                <h2 data-i18n="settings.about">About</h2>
-                <p><strong>Huskelista</strong> v1.0.0</p>
-                <p data-i18n="settings.about_text">A simple tool for managing health logistics.</p>
-            </section>
-        </main>
-    </div>
+      <section class="card">
+        <h2 data-i18n="settings.data_management">Data Management</h2>
+        <p data-i18n="settings.data_info">
+          All your data is stored locally on this device.
+        </p>
+        <div style="margin-top: var(--space-md)">
+          <button
+            id="clear-data-btn"
+            class="btn"
+            style="background-color: var(--color-error)"
+            data-i18n="settings.btn.clear"
+          >
+            Clear All Data
+          </button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 data-i18n="settings.about">About</h2>
+        <p><strong>Huskelista</strong> v1.0.0</p>
+        <p data-i18n="settings.about_text">
+          A simple tool for managing health logistics.
+        </p>
+      </section>
+    </main>
 
     <script type="module">
-        import { Storage } from './js/modules/storage.js';
-        import { I18n } from './js/modules/i18n.js';
+      import { Storage } from "./js/modules/storage.js";
+      import { I18n } from "./js/modules/i18n.js";
 
-        // Language Selector
-        const langSelect = document.getElementById('language-select');
-        langSelect.value = I18n.currentLang;
-        
-        langSelect.addEventListener('change', (e) => {
-            I18n.setLanguage(e.target.value);
+      // Language Selector
+      const langSelect = document.getElementById("language-select");
+      langSelect.value = I18n.currentLang;
+
+      langSelect.addEventListener("change", (e) => {
+        I18n.setLanguage(e.target.value);
+      });
+
+      // Theme Logic
+      const themeToggle = document.getElementById("theme-toggle");
+      const savedTheme = Storage.get("huskelista_theme");
+      themeToggle.checked = savedTheme === "dark";
+
+      themeToggle.addEventListener("change", (e) => {
+        if (e.target.checked) {
+          document.body.classList.add("dark-mode");
+          Storage.set("huskelista_theme", "dark");
+        } else {
+          document.body.classList.remove("dark-mode");
+          Storage.set("huskelista_theme", "light");
+        }
+      });
+
+      document
+        .getElementById("clear-data-btn")
+        .addEventListener("click", () => {
+          if (confirm(I18n.get("settings.confirm_clear"))) {
+            localStorage.clear();
+            alert(I18n.get("settings.alert_cleared"));
+            window.location.href = "index.html";
+          }
         });
-
-        // Theme Logic
-        const themeToggle = document.getElementById('theme-toggle');
-        const savedTheme = Storage.get('huskelista_theme');
-        themeToggle.checked = savedTheme === 'dark';
-
-        themeToggle.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                document.body.classList.add('dark-mode');
-                Storage.set('huskelista_theme', 'dark');
-            } else {
-                document.body.classList.remove('dark-mode');
-                Storage.set('huskelista_theme', 'light');
-            }
-        });
-
-        document.getElementById('clear-data-btn').addEventListener('click', () => {
-            if(confirm(I18n.get('settings.confirm_clear'))) {
-                localStorage.clear();
-                alert(I18n.get('settings.alert_cleared'));
-                window.location.href = 'index.html';
-            }
-        });
-    </script>
-</body>
-</html>
     </script>
     <script type="module" src="js/app.js"></script>
   </body>

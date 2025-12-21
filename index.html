@@ -7,34 +7,22 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="container">
-      <header
-        style="text-align: center; border: none; margin-top: var(--space-xl)"
-      >
-        <h1 data-i18n="app.title">Huskelista</h1>
-        <p
-          style="
-            margin: 0 auto;
-            font-size: 1.25rem;
-            color: var(--color-text-muted);
-          "
-          data-i18n="index.subtitle"
-        >
+    <div class="container" style="display: flex; flex-direction: column; justify-content: center; min-height: 100vh;">
+      <header style="text-align: center; border: none; margin-bottom: var(--space-xl); background: transparent; box-shadow: none;">
+        <h1 data-i18n="app.title" style="font-size: 3rem; color: var(--color-primary);">Huskelista</h1>
+        <p style="margin: 0 auto; font-size: 1.5rem; color: var(--color-text-muted);" data-i18n="index.subtitle">
           A calm, simple way to manage health appointments and notes.
         </p>
       </header>
 
-      <main style="text-align: center; margin-top: var(--space-xl)">
-        <div class="card" style="max-width: 600px; margin: 0 auto">
-          <h2 data-i18n="index.welcome">Welcome</h2>
-          <p data-i18n="index.description">
-            Huskelista helps you keep track of appointments, notes, and
-            documents without the stress. No clutter, just what you need.
+      <main style="text-align: center;">
+        <div class="card" style="max-width: 600px; margin: 0 auto; padding: var(--space-xl);">
+          <h2 data-i18n="index.welcome" style="margin-bottom: var(--space-md);">Welcome</h2>
+          <p data-i18n="index.description" style="font-size: 1.1rem; margin-bottom: var(--space-lg);">
+            Huskelista helps you keep track of appointments, notes, and documents without the stress. No clutter, just what you need.
           </p>
-          <div style="margin-top: var(--space-lg)">
-            <a href="dashboard.html" class="btn" data-i18n="index.open"
-              >Open My List</a
-            >
+          <div>
+            <a href="dashboard.html" class="btn" data-i18n="index.open" style="font-size: 1.2rem; padding: 1rem 2.5rem;">Open My List</a>
           </div>
         </div>
       </main>

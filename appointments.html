@@ -7,145 +7,141 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="container">
-      <header>
-        <div class="container">
-          <h1 data-i18n="nav.appointments">Appointments</h1>
-          <nav>
-            <ul>
-              <li>
-                <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
-              </li>
-              <li>
-                <a
-                  href="appointments.html"
-                  class="active"
-                  data-i18n="nav.appointments"
-                  >Appointments</a
-                >
-              </li>
-              <li>
-                <a href="medications.html" data-i18n="nav.medications"
-                  >Medications</a
-                >
-              </li>
-              <li>
-                <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
-              </li>
-              <li><a href="vitals.html" data-i18n="nav.vitals">Vitals</a></li>
-              <li>
-                <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
-              </li>
-              <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
-              <li>
-                <a href="documents.html" data-i18n="nav.documents">Documents</a>
-              </li>
-              <li><a href="report.html" data-i18n="nav.report">Report</a></li>
-              <li>
-                <a href="profile.html" data-i18n="nav.profile">Profile</a>
-              </li>
-              <li>
-                <a href="settings.html" data-i18n="nav.settings">Settings</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
+    <header>
+      <div class="container">
+        <h1 data-i18n="nav.appointments">Appointments</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+            </li>
+            <li>
+              <a
+                href="appointments.html"
+                class="active"
+                data-i18n="nav.appointments"
+                >Appointments</a
+              >
+            </li>
+            <li>
+              <a href="medications.html" data-i18n="nav.medications"
+                >Medications</a
+              >
+            </li>
+            <li>
+              <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
+            </li>
+            <li><a href="vitals.html" data-i18n="nav.vitals">Vitals</a></li>
+            <li>
+              <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
+            </li>
+            <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
+            <li>
+              <a href="documents.html" data-i18n="nav.documents">Documents</a>
+            </li>
+            <li><a href="report.html" data-i18n="nav.report">Report</a></li>
+            <li>
+              <a href="profile.html" data-i18n="nav.profile">Profile</a>
+            </li>
+            <li>
+              <a href="settings.html" data-i18n="nav.settings">Settings</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-      <main>
-        <section class="card">
-          <h2 data-i18n="appointments.add_new">Add New Appointment</h2>
-          <form id="add-appointment-form">
-            <label for="title" data-i18n="appointments.label.title"
-              >Title</label
-            >
-            <input
-              type="text"
-              id="title"
-              name="title"
-              required
-              placeholder="e.g. Doctor Smith"
-              data-i18n-placeholder="appointments.placeholder.title"
-            />
+    <main class="container">
+      <section class="card">
+        <h2 data-i18n="appointments.add_new">Add New Appointment</h2>
+        <form id="add-appointment-form">
+          <label for="title" data-i18n="appointments.label.title">Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            required
+            placeholder="e.g. Doctor Smith"
+            data-i18n-placeholder="appointments.placeholder.title"
+          />
 
-            <label for="date" data-i18n="appointments.label.date"
-              >Date & Time</label
-            >
-            <input type="datetime-local" id="date" name="date" required />
-
-            <label for="location" data-i18n="appointments.label.location"
-              >Location</label
-            >
-            <input
-              type="text"
-              id="location"
-              name="location"
-              placeholder="e.g. City Hospital, Room 302"
-              data-i18n-placeholder="appointments.placeholder.location"
-            />
-
-            <label for="notes" data-i18n="appointments.label.notes"
-              >Things to remember / ask</label
-            >
-            <textarea
-              id="notes"
-              name="notes"
-              rows="3"
-              placeholder="Questions for the doctor..."
-              data-i18n-placeholder="appointments.placeholder.notes"
-            ></textarea>
-
-            <button type="submit" class="btn" data-i18n="appointments.btn.add">
-              Add Appointment
-            </button>
-          </form>
-
-          <div
-            style="
-              margin-top: var(--space-xl);
-              padding-top: var(--space-md);
-              border-top: 1px solid #eee;
-            "
+          <label for="date" data-i18n="appointments.label.date"
+            >Date & Time</label
           >
-            <h3 data-i18n="appointments.import">Import from Calendar</h3>
-            <p
-              style="
-                font-size: 0.9rem;
-                color: var(--color-text-muted);
-                margin-bottom: var(--space-sm);
-              "
-              data-i18n="appointments.import_desc"
-            >
-              Upload an .ics file to add appointments automatically.
-            </p>
-            <input
-              type="file"
-              id="ics-input"
-              accept=".ics"
-              style="display: none"
-            />
-            <button
-              class="btn btn--secondary"
-              onclick="document.getElementById('ics-input').click()"
-              data-i18n="appointments.btn_import"
-            >
-              Select .ics File
-            </button>
-            <span
-              id="import-status"
-              style="margin-left: var(--space-sm); font-size: 0.9rem"
-            ></span>
-          </div>
-        </section>
+          <input type="datetime-local" id="date" name="date" required />
 
-        <section>
-          <h2 data-i18n="appointments.upcoming">Upcoming</h2>
-          <div id="appointments-list">
-            <!-- List will be populated here -->
-          </div>
-        </section>
-      </main>
-    </div>
+          <label for="location" data-i18n="appointments.label.location"
+            >Location</label
+          >
+          <input
+            type="text"
+            id="location"
+            name="location"
+            placeholder="e.g. City Hospital, Room 302"
+            data-i18n-placeholder="appointments.placeholder.location"
+          />
+
+          <label for="notes" data-i18n="appointments.label.notes"
+            >Things to remember / ask</label
+          >
+          <textarea
+            id="notes"
+            name="notes"
+            rows="3"
+            placeholder="Questions for the doctor..."
+            data-i18n-placeholder="appointments.placeholder.notes"
+          ></textarea>
+
+          <button type="submit" class="btn" data-i18n="appointments.btn.add">
+            Add Appointment
+          </button>
+        </form>
+
+        <div
+          style="
+            margin-top: var(--space-xl);
+            padding-top: var(--space-md);
+            border-top: 1px solid #eee;
+          "
+        >
+          <h3 data-i18n="appointments.import">Import from Calendar</h3>
+          <p
+            style="
+              font-size: 0.9rem;
+              color: var(--color-text-muted);
+              margin-bottom: var(--space-sm);
+            "
+            data-i18n="appointments.import_desc"
+          >
+            Upload an .ics file to add appointments automatically.
+          </p>
+          <input
+            type="file"
+            id="ics-input"
+            accept=".ics"
+            style="display: none"
+          />
+          <button
+            class="btn btn--secondary"
+            onclick="document.getElementById('ics-input').click()"
+            data-i18n="appointments.btn_import"
+          >
+            Select .ics File
+          </button>
+          <span
+            id="import-status"
+            style="margin-left: var(--space-sm); font-size: 0.9rem"
+          ></span>
+        </div>
+      </section>
+
+      <section>
+        <h2 data-i18n="appointments.upcoming">Upcoming</h2>
+        <div id="appointments-list">
+          <!-- List will be populated here -->
+        </div>
+      </section>
+    </main>
 
     <script type="module">
       import { Appointments } from "./js/modules/appointments.js";

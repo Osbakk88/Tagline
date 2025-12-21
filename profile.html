@@ -7,158 +7,151 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="container">
-      <header>
-        <div class="container">
-          <h1 data-i18n="nav.profile">Profile</h1>
-          <nav>
-            <ul>
-              <li>
-                <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
-              </li>
-              <li>
-                <a href="appointments.html" data-i18n="nav.appointments"
-                  >Appointments</a
-                >
-              </li>
-              <li>
-                <a href="medications.html" data-i18n="nav.medications"
-                  >Medications</a
-                >
-              </li>
-              <li>
-                <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
-              </li>
-              <li><a href="vitals.html" data-i18n="nav.vitals">Vitals</a></li>
-              <li>
-                <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
-              </li>
-              <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
-              <li>
-                <a href="documents.html" data-i18n="nav.documents">Documents</a>
-              </li>
-              <li><a href="report.html" data-i18n="nav.report">Report</a></li>
-              <li>
-                <a href="profile.html" class="active" data-i18n="nav.profile"
-                  >Profile</a
-                >
-              </li>
-              <li>
-                <a href="settings.html" data-i18n="nav.settings">Settings</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-
-      <main>
-        <section class="card">
-          <h2 data-i18n="profile.personal_info">Personal Information</h2>
-          <form id="profile-form">
-            <label for="name" data-i18n="profile.label.name">Full Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="e.g. Ola Nordmann"
-              data-i18n-placeholder="profile.placeholder.name"
-            />
-
-            <div
-              style="
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: var(--space-md);
-              "
-            >
-              <div>
-                <label for="dob" data-i18n="profile.label.dob"
-                  >Date of Birth</label
-                >
-                <input type="date" id="dob" name="dob" />
-              </div>
-              <div>
-                <label for="bloodType" data-i18n="profile.label.blood_type"
-                  >Blood Type</label
-                >
-                <select id="bloodType" name="bloodType">
-                  <option value="">-</option>
-                  <option value="A+">A+</option>
-                  <option value="A-">A-</option>
-                  <option value="B+">B+</option>
-                  <option value="B-">B-</option>
-                  <option value="AB+">AB+</option>
-                  <option value="AB-">AB-</option>
-                  <option value="O+">O+</option>
-                  <option value="O-">O-</option>
-                </select>
-              </div>
-            </div>
-
-            <label for="allergies" data-i18n="profile.label.allergies"
-              >Allergies / Medical Conditions</label
-            >
-            <textarea
-              id="allergies"
-              name="allergies"
-              rows="3"
-              placeholder="e.g. Penicillin, Peanuts..."
-              data-i18n-placeholder="profile.placeholder.allergies"
-            ></textarea>
-
-            <h3
-              style="
-                margin-top: var(--space-lg);
-                margin-bottom: var(--space-sm);
-              "
-              data-i18n="profile.emergency_contact"
-            >
-              Emergency Contact
-            </h3>
-
-            <label for="emergencyName" data-i18n="profile.label.emergency_name"
-              >Contact Name</label
-            >
-            <input
-              type="text"
-              id="emergencyName"
-              name="emergencyName"
-              placeholder="e.g. Kari Nordmann"
-              data-i18n-placeholder="profile.placeholder.emergency_name"
-            />
-
-            <label
-              for="emergencyPhone"
-              data-i18n="profile.label.emergency_phone"
-              >Contact Phone</label
-            >
-            <input
-              type="tel"
-              id="emergencyPhone"
-              name="emergencyPhone"
-              placeholder="123 45 678"
-              data-i18n-placeholder="profile.placeholder.emergency_phone"
-            />
-
-            <div style="margin-top: var(--space-md); text-align: right">
-              <span
-                id="save-message"
-                style="
-                  color: var(--color-primary);
-                  margin-right: var(--space-sm);
-                  opacity: 0;
-                  transition: opacity 0.3s;
-                "
-                >Saved!</span
+    <header>
+      <div class="container">
+        <h1 data-i18n="nav.profile">Profile</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+            </li>
+            <li>
+              <a href="appointments.html" data-i18n="nav.appointments"
+                >Appointments</a
               >
-              <button type="submit" class="btn" data-i18n="btn.save">
-                Save Profile
-              </button>
+            </li>
+            <li>
+              <a href="medications.html" data-i18n="nav.medications"
+                >Medications</a
+              >
+            </li>
+            <li>
+              <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
+            </li>
+            <li><a href="vitals.html" data-i18n="nav.vitals">Vitals</a></li>
+            <li>
+              <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
+            </li>
+            <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
+            <li>
+              <a href="documents.html" data-i18n="nav.documents">Documents</a>
+            </li>
+            <li><a href="report.html" data-i18n="nav.report">Report</a></li>
+            <li>
+              <a href="profile.html" class="active" data-i18n="nav.profile"
+                >Profile</a
+              >
+            </li>
+            <li>
+              <a href="settings.html" data-i18n="nav.settings">Settings</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2 data-i18n="profile.personal_info">Personal Information</h2>
+        <form id="profile-form">
+          <label for="name" data-i18n="profile.label.name">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="e.g. Ola Nordmann"
+            data-i18n-placeholder="profile.placeholder.name"
+          />
+
+          <div
+            style="
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: var(--space-md);
+            "
+          >
+            <div>
+              <label for="dob" data-i18n="profile.label.dob"
+                >Date of Birth</label
+              >
+              <input type="date" id="dob" name="dob" />
             </div>
-          </form>
-        </section>
-      </main>
-    </div>
+            <div>
+              <label for="bloodType" data-i18n="profile.label.blood_type"
+                >Blood Type</label
+              >
+              <select id="bloodType" name="bloodType">
+                <option value="">-</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="allergies" data-i18n="profile.label.allergies"
+            >Allergies / Medical Conditions</label
+          >
+          <textarea
+            id="allergies"
+            name="allergies"
+            rows="3"
+            placeholder="e.g. Penicillin, Peanuts..."
+            data-i18n-placeholder="profile.placeholder.allergies"
+          ></textarea>
+
+          <h3
+            style="margin-top: var(--space-lg); margin-bottom: var(--space-sm)"
+            data-i18n="profile.emergency_contact"
+          >
+            Emergency Contact
+          </h3>
+
+          <label for="emergencyName" data-i18n="profile.label.emergency_name"
+            >Contact Name</label
+          >
+          <input
+            type="text"
+            id="emergencyName"
+            name="emergencyName"
+            placeholder="e.g. Kari Nordmann"
+            data-i18n-placeholder="profile.placeholder.emergency_name"
+          />
+
+          <label for="emergencyPhone" data-i18n="profile.label.emergency_phone"
+            >Contact Phone</label
+          >
+          <input
+            type="tel"
+            id="emergencyPhone"
+            name="emergencyPhone"
+            placeholder="123 45 678"
+            data-i18n-placeholder="profile.placeholder.emergency_phone"
+          />
+
+          <div style="margin-top: var(--space-md); text-align: right">
+            <span
+              id="save-message"
+              style="
+                color: var(--color-primary);
+                margin-right: var(--space-sm);
+                opacity: 0;
+                transition: opacity 0.3s;
+              "
+              >Saved!</span
+            >
+            <button type="submit" class="btn" data-i18n="btn.save">
+              Save Profile
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
 
     <script type="module">
       import { Profile } from "./js/modules/profile.js";

@@ -7,127 +7,117 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="container">
-      <header>
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--space-sm);
-          "
-        >
-          <h1 data-i18n="nav.medications">Medications</h1>
-          <nav>
-            <ul>
-              <li>
-                <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
-              </li>
-              <li>
-                <a href="appointments.html" data-i18n="nav.appointments"
-                  >Appointments</a
-                >
-              </li>
-              <li>
-                <a
-                  href="medications.html"
-                  class="active"
-                  data-i18n="nav.medications"
-                  >Medications</a
-                >
-              </li>
-              <li>
-                <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
-              </li>
-              <li>
-                <a href="vitals.html" data-i18n="nav.vitals">Vitals</a>
-              </li>
-              <li>
-                <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
-              </li>
-              <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
-              <li>
-                <a href="documents.html" data-i18n="nav.documents">Documents</a>
-              </li>
-              <li>
-                <a href="report.html" data-i18n="nav.report">Report</a>
-              </li>
-              <li>
-                <a href="profile.html" data-i18n="nav.profile">Profile</a>
-              </li>
-              <li>
-                <a href="settings.html" data-i18n="nav.settings">Settings</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-
-      <main>
-        <section class="card">
-          <h2 data-i18n="medications.add_new">Add Medication</h2>
-          <form id="add-medication-form">
-            <label for="name" data-i18n="medications.label.name"
-              >Medication Name</label
-            >
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              placeholder="e.g. Paracetamol"
-              data-i18n-placeholder="medications.placeholder.name"
-            />
-
-            <label for="schedule" data-i18n="medications.label.schedule"
-              >Schedule</label
-            >
-            <select id="schedule" name="schedule">
-              <option value="morning" data-i18n="medications.schedule.morning">
-                Morning
-              </option>
-              <option value="evening" data-i18n="medications.schedule.evening">
-                Evening
-              </option>
-              <option value="daily" data-i18n="medications.schedule.daily">
-                Daily (Morning & Evening)
-              </option>
-              <option value="needed" data-i18n="medications.schedule.needed">
-                As Needed
-              </option>
-            </select>
-
-            <div style="margin-bottom: var(--space-md)">
-              <label
-                style="display: flex; align-items: center; gap: var(--space-sm)"
+    <header>
+      <div class="container">
+        <h1 data-i18n="nav.medications">Medications</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+            </li>
+            <li>
+              <a href="appointments.html" data-i18n="nav.appointments"
+                >Appointments</a
               >
-                <input
-                  type="checkbox"
-                  id="reminder"
-                  name="reminder"
-                  style="width: auto; margin-bottom: 0"
-                />
-                <span data-i18n="medications.label.reminder"
-                  >Enable Reminder (Visual only)</span
-                >
-              </label>
-            </div>
+            </li>
+            <li>
+              <a
+                href="medications.html"
+                class="active"
+                data-i18n="nav.medications"
+                >Medications</a
+              >
+            </li>
+            <li>
+              <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
+            </li>
+            <li>
+              <a href="vitals.html" data-i18n="nav.vitals">Vitals</a>
+            </li>
+            <li>
+              <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
+            </li>
+            <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
+            <li>
+              <a href="documents.html" data-i18n="nav.documents">Documents</a>
+            </li>
+            <li>
+              <a href="report.html" data-i18n="nav.report">Report</a>
+            </li>
+            <li>
+              <a href="profile.html" data-i18n="nav.profile">Profile</a>
+            </li>
+            <li>
+              <a href="settings.html" data-i18n="nav.settings">Settings</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-            <button type="submit" class="btn" data-i18n="medications.btn.add">
-              Add Medication
-            </button>
-          </form>
-        </section>
+    <main class="container">
+      <section class="card">
+        <h2 data-i18n="medications.add_new">Add Medication</h2>
+        <form id="add-medication-form">
+          <label for="name" data-i18n="medications.label.name"
+            >Medication Name</label
+          >
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="e.g. Paracetamol"
+            data-i18n-placeholder="medications.placeholder.name"
+          />
 
-        <section>
-          <h2 data-i18n="medications.my_meds">My Medications</h2>
-          <div id="medications-list">
-            <!-- List will be populated here -->
+          <label for="schedule" data-i18n="medications.label.schedule"
+            >Schedule</label
+          >
+          <select id="schedule" name="schedule">
+            <option value="morning" data-i18n="medications.schedule.morning">
+              Morning
+            </option>
+            <option value="evening" data-i18n="medications.schedule.evening">
+              Evening
+            </option>
+            <option value="daily" data-i18n="medications.schedule.daily">
+              Daily (Morning & Evening)
+            </option>
+            <option value="needed" data-i18n="medications.schedule.needed">
+              As Needed
+            </option>
+          </select>
+
+          <div style="margin-bottom: var(--space-md)">
+            <label
+              style="display: flex; align-items: center; gap: var(--space-sm)"
+            >
+              <input
+                type="checkbox"
+                id="reminder"
+                name="reminder"
+                style="width: auto; margin-bottom: 0"
+              />
+              <span data-i18n="medications.label.reminder"
+                >Enable Reminder (Visual only)</span
+              >
+            </label>
           </div>
-        </section>
-      </main>
-    </div>
+
+          <button type="submit" class="btn" data-i18n="medications.btn.add">
+            Add Medication
+          </button>
+        </form>
+      </section>
+
+      <section>
+        <h2 data-i18n="medications.my_meds">My Medications</h2>
+        <div id="medications-list">
+          <!-- List will be populated here -->
+        </div>
+      </section>
+    </main>
 
     <script type="module">
       import { Medications } from "./js/modules/medications.js";

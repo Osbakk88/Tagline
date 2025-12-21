@@ -65,138 +65,122 @@
     </style>
   </head>
   <body>
-    <div class="container">
-      <header>
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--space-sm);
-          "
-        >
-          <h1 data-i18n="nav.documents">Documents</h1>
-          <nav>
-            <ul>
-              <li>
-                <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
-              </li>
-              <li>
-                <a href="appointments.html" data-i18n="nav.appointments"
-                  >Appointments</a
-                >
-              </li>
-              <li>
-                <a href="medications.html" data-i18n="nav.medications"
-                  >Medications</a
-                >
-              </li>
-              <li>
-                <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
-              </li>
-              <li>
-                <a href="vitals.html" data-i18n="nav.vitals">Vitals</a>
-              </li>
-              <li>
-                <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
-              </li>
-              <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
-              <li>
-                <a
-                  href="documents.html"
-                  class="active"
-                  data-i18n="nav.documents"
-                  >Documents</a
-                >
-              </li>
-              <li>
-                <a href="report.html" data-i18n="nav.report">Report</a>
-              </li>
-              <li>
-                <a href="profile.html" data-i18n="nav.profile">Profile</a>
-              </li>
-              <li>
-                <a href="settings.html" data-i18n="nav.settings">Settings</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-
-      <main>
-        <section class="card">
-          <h2 data-i18n="documents.upload">Upload Document</h2>
-          <p
-            style="
-              font-size: 0.9rem;
-              color: var(--color-text-muted);
-              margin-bottom: var(--space-sm);
-            "
-            data-i18n="documents.warning"
-          >
-            Note: Files are stored in your browser. Large files may not be
-            saved.
-          </p>
-          <form id="add-document-form">
-            <label for="name" data-i18n="documents.label.name"
-              >Document Name</label
-            >
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              placeholder="e.g. Hospital Letter Jan 2025"
-              data-i18n-placeholder="documents.placeholder.name"
-            />
-
-            <label for="category" data-i18n="documents.label.category"
-              >Category</label
-            >
-            <select id="category" name="category">
-              <option value="General" data-i18n="documents.category.general">
-                General
-              </option>
-              <option value="Hospital" data-i18n="documents.category.hospital">
-                Hospital
-              </option>
-              <option value="NAV" data-i18n="documents.category.nav">
-                NAV
-              </option>
-              <option
-                value="Prescriptions"
-                data-i18n="documents.category.prescriptions"
+    <header>
+      <div class="container">
+        <h1 data-i18n="nav.documents">Documents</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+            </li>
+            <li>
+              <a href="appointments.html" data-i18n="nav.appointments"
+                >Appointments</a
               >
-                Prescriptions
-              </option>
-            </select>
+            </li>
+            <li>
+              <a href="medications.html" data-i18n="nav.medications"
+                >Medications</a
+              >
+            </li>
+            <li>
+              <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
+            </li>
+            <li>
+              <a href="vitals.html" data-i18n="nav.vitals">Vitals</a>
+            </li>
+            <li>
+              <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
+            </li>
+            <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
+            <li>
+              <a href="documents.html" class="active" data-i18n="nav.documents"
+                >Documents</a
+              >
+            </li>
+            <li>
+              <a href="report.html" data-i18n="nav.report">Report</a>
+            </li>
+            <li>
+              <a href="profile.html" data-i18n="nav.profile">Profile</a>
+            </li>
+            <li>
+              <a href="settings.html" data-i18n="nav.settings">Settings</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-            <label for="file" data-i18n="documents.label.file"
-              >File (Image or PDF)</label
+    <main class="container">
+      <section class="card">
+        <h2 data-i18n="documents.upload">Upload Document</h2>
+        <p
+          style="
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-sm);
+          "
+          data-i18n="documents.warning"
+        >
+          Note: Files are stored in your browser. Large files may not be saved.
+        </p>
+        <form id="add-document-form">
+          <label for="name" data-i18n="documents.label.name"
+            >Document Name</label
+          >
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="e.g. Hospital Letter Jan 2025"
+            data-i18n-placeholder="documents.placeholder.name"
+          />
+
+          <label for="category" data-i18n="documents.label.category"
+            >Category</label
+          >
+          <select id="category" name="category">
+            <option value="General" data-i18n="documents.category.general">
+              General
+            </option>
+            <option value="Hospital" data-i18n="documents.category.hospital">
+              Hospital
+            </option>
+            <option value="NAV" data-i18n="documents.category.nav">NAV</option>
+            <option
+              value="Prescriptions"
+              data-i18n="documents.category.prescriptions"
             >
-            <input
-              type="file"
-              id="file"
-              name="file"
-              accept="image/*,application/pdf"
-              required
-            />
+              Prescriptions
+            </option>
+          </select>
 
-            <button type="submit" class="btn" data-i18n="documents.btn.save">
-              Save Document
-            </button>
-          </form>
-        </section>
+          <label for="file" data-i18n="documents.label.file"
+            >File (Image or PDF)</label
+          >
+          <input
+            type="file"
+            id="file"
+            name="file"
+            accept="image/*,application/pdf"
+            required
+          />
 
-        <section>
-          <h2 data-i18n="documents.stored">Stored Documents</h2>
-          <div id="documents-list">
-            <!-- List will be populated here -->
-          </div>
-        </section>
-      </main>
-    </div>
+          <button type="submit" class="btn" data-i18n="documents.btn.save">
+            Save Document
+          </button>
+        </form>
+      </section>
+
+      <section>
+        <h2 data-i18n="documents.stored">Stored Documents</h2>
+        <div id="documents-list">
+          <!-- List will be populated here -->
+        </div>
+      </section>
+    </main>
 
     <div id="document-modal" class="modal-backdrop">
       <div class="modal-content">

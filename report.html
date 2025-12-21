@@ -30,99 +30,87 @@
     </style>
   </head>
   <body>
-    <div class="container">
-      <header>
+    <header>
+      <div class="container">
+        <h1 data-i18n="nav.report">Doctor's Report</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+            </li>
+            <li>
+              <a href="appointments.html" data-i18n="nav.appointments"
+                >Appointments</a
+              >
+            </li>
+            <li>
+              <a href="medications.html" data-i18n="nav.medications"
+                >Medications</a
+              >
+            </li>
+            <li>
+              <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
+            </li>
+            <li><a href="vitals.html" data-i18n="nav.vitals">Vitals</a></li>
+            <li>
+              <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
+            </li>
+            <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
+            <li>
+              <a href="documents.html" data-i18n="nav.documents">Documents</a>
+            </li>
+            <li>
+              <a href="report.html" class="active" data-i18n="nav.report"
+                >Report</a
+              >
+            </li>
+            <li>
+              <a href="profile.html" data-i18n="nav.profile">Profile</a>
+            </li>
+            <li>
+              <a href="settings.html" data-i18n="nav.settings">Settings</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card no-print">
+        <h2 data-i18n="report.settings">Report Settings</h2>
         <div
           style="
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: var(--space-md);
+            align-items: end;
             flex-wrap: wrap;
-            gap: var(--space-sm);
           "
         >
-          <h1 data-i18n="nav.report">Doctor's Report</h1>
-          <nav>
-            <ul>
-              <li>
-                <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
-              </li>
-              <li>
-                <a href="appointments.html" data-i18n="nav.appointments"
-                  >Appointments</a
-                >
-              </li>
-              <li>
-                <a href="medications.html" data-i18n="nav.medications"
-                  >Medications</a
-                >
-              </li>
-              <li>
-                <a href="symptoms.html" data-i18n="nav.symptoms">Symptoms</a>
-              </li>
-              <li><a href="vitals.html" data-i18n="nav.vitals">Vitals</a></li>
-              <li>
-                <a href="contacts.html" data-i18n="nav.contacts">Contacts</a>
-              </li>
-              <li><a href="notes.html" data-i18n="nav.notes">Notes</a></li>
-              <li>
-                <a href="documents.html" data-i18n="nav.documents">Documents</a>
-              </li>
-              <li>
-                <a href="report.html" class="active" data-i18n="nav.report"
-                  >Report</a
-                >
-              </li>
-              <li>
-                <a href="profile.html" data-i18n="nav.profile">Profile</a>
-              </li>
-              <li>
-                <a href="settings.html" data-i18n="nav.settings">Settings</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-
-      <main>
-        <section class="card no-print">
-          <h2 data-i18n="report.settings">Report Settings</h2>
-          <div
-            style="
-              display: flex;
-              gap: var(--space-md);
-              align-items: end;
-              flex-wrap: wrap;
-            "
-          >
-            <div>
-              <label for="range" data-i18n="report.range">Time Range</label>
-              <select id="range">
-                <option value="30" data-i18n="report.range.30">
-                  Last 30 Days
-                </option>
-                <option value="90" data-i18n="report.range.90">
-                  Last 3 Months
-                </option>
-                <option value="365" data-i18n="report.range.365">
-                  Last Year
-                </option>
-                <option value="all" data-i18n="report.range.all">
-                  All Time
-                </option>
-              </select>
-            </div>
-            <button id="print-btn" class="btn" data-i18n="report.print">
-              Print Report
-            </button>
+          <div>
+            <label for="range" data-i18n="report.range">Time Range</label>
+            <select id="range">
+              <option value="30" data-i18n="report.range.30">
+                Last 30 Days
+              </option>
+              <option value="90" data-i18n="report.range.90">
+                Last 3 Months
+              </option>
+              <option value="365" data-i18n="report.range.365">
+                Last Year
+              </option>
+              <option value="all" data-i18n="report.range.all">All Time</option>
+            </select>
           </div>
-        </section>
-
-        <div id="report-content">
-          <!-- Report sections will be generated here -->
+          <button id="print-btn" class="btn" data-i18n="report.print">
+            Print Report
+          </button>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <div id="report-content">
+        <!-- Report sections will be generated here -->
+      </div>
+    </main>
 
     <script type="module">
       import { Appointments } from "./js/modules/appointments.js";
