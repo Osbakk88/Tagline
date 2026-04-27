@@ -292,7 +292,7 @@
                 messageKey: "settings.alert_exported",
                 variant: "success",
               },
-            })
+            }),
           );
         });
 
@@ -336,7 +336,7 @@
             JSON.stringify({
               messageKey: "settings.alert_imported",
               variant: "success",
-            })
+            }),
           );
           window.location.reload();
         } catch (error) {
@@ -346,7 +346,7 @@
                 messageKey: "settings.alert_import_failed",
                 variant: "error",
               },
-            })
+            }),
           );
         } finally {
           importFile.value = "";

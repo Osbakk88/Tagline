@@ -44,7 +44,7 @@ function emitStorageError(operation, error) {
           operation,
           name: error?.name || "StorageError",
         },
-      })
+      }),
     );
   }
 }

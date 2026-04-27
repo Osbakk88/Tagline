@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
           pendingMessage.messageKey
             ? I18n.get(pendingMessage.messageKey)
             : pendingMessage.message,
-          pendingMessage.variant || "success"
+          pendingMessage.variant || "success",
         );
       }
     } catch (error) {
