@@ -118,6 +118,22 @@ body.landing-page {
     linear-gradient(145deg, #3b2722 0%, #5f4035 45%, #8f6548 100%);
 }
 
+body:not(.landing-page) {
+  background-color: #f7f2eb;
+  background-image:
+    radial-gradient(
+      circle at 12% 10%,
+      rgba(242, 211, 153, 0.34),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 88% 10%,
+      rgba(255, 255, 255, 0.6),
+      transparent 26%
+    ),
+    linear-gradient(165deg, #f9f4ee 0%, #f4ede4 56%, #f8f3eb 100%);
+}
+
 body.landing-page .brand__tagline,
 body.landing-page > .container > header p {
   color: rgba(255, 247, 236, 0.86) !important;
@@ -141,6 +157,156 @@ body.dark-mode.landing-page {
       transparent 24%
     ),
     linear-gradient(145deg, #0f1d31 0%, #14263e 42%, #1c2f45 100%);
+}
+
+body.dark-mode:not(.landing-page) {
+  background-color: #102a43;
+  background-image:
+    radial-gradient(
+      circle at 14% 14%,
+      rgba(77, 182, 172, 0.14),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 88% 12%,
+      rgba(240, 244, 248, 0.08),
+      transparent 26%
+    ),
+    linear-gradient(165deg, #0f1d31 0%, #12243b 55%, #14283f 100%);
+}
+
+body.landing-page .landing-lang {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 20;
+}
+
+body.landing-page .landing-shell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+body.landing-page .landing-header {
+  position: relative;
+  top: auto;
+  margin: 0 auto var(--space-xl);
+  width: min(900px, 100%);
+  text-align: center;
+  padding: clamp(2.1rem, 4.7vw, 3.7rem) clamp(1.4rem, 3.6vw, 2.7rem)
+    clamp(2.2rem, 4vw, 3rem);
+  border: 1px solid rgba(255, 247, 236, 0.34);
+  border-radius: 999px 999px 56px 56px / 86px 86px 56px 56px;
+  background: linear-gradient(
+    135deg,
+    var(--color-header-bg) 0%,
+    var(--color-header-bg-2) 100%
+  );
+  box-shadow:
+    0 22px 40px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.26);
+  backdrop-filter: saturate(140%) blur(9px);
+  -webkit-backdrop-filter: saturate(140%) blur(9px);
+}
+
+body.landing-page .landing-header::before {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 106%;
+  height: 38%;
+  border-radius: 999px 999px 40px 40px / 80px 80px 40px 40px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.34),
+    rgba(255, 255, 255, 0.09)
+  );
+}
+
+body.landing-page .landing-header::after {
+  left: auto;
+  right: -12%;
+  bottom: auto;
+  top: -58%;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  transform: none;
+  background: radial-gradient(
+    circle,
+    rgba(255, 217, 166, 0.36),
+    rgba(255, 217, 166, 0.08) 38%,
+    transparent 70%
+  );
+}
+
+body.landing-page .landing-brand {
+  justify-content: center;
+  margin-bottom: var(--space-md);
+}
+
+body.landing-page .landing-brand-text {
+  text-align: left;
+}
+
+body.landing-page .landing-brand .brand__name {
+  font-size: clamp(2.4rem, 5vw, 3rem);
+}
+
+body.landing-page .landing-brand .brand__tagline {
+  font-size: clamp(1.2rem, 2.8vw, 1.45rem);
+}
+
+body.landing-page .landing-subtitle {
+  margin: 0 auto;
+  max-width: 28ch;
+  font-size: clamp(1.3rem, 3vw, 1.85rem);
+  line-height: 1.55;
+  color: rgba(255, 247, 236, 0.92);
+}
+
+body.landing-page .landing-main {
+  text-align: center;
+}
+
+body.landing-page .landing-card {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var(--space-xl);
+}
+
+body.landing-page .landing-card h2 {
+  font-size: 2rem;
+  margin-bottom: var(--space-md);
+}
+
+body.landing-page .landing-description {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  font-weight: 600;
+  margin-bottom: var(--space-lg);
+}
+
+body.landing-page .landing-cta {
+  font-size: 1.35rem;
+  padding: 1.1rem 2.8rem;
+}
+
+body.landing-page .landing-cta i {
+  margin-right: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  body.landing-page .landing-header {
+    border-radius: 999px 999px 34px 34px / 56px 56px 34px 34px;
+    padding: 1.6rem 1.2rem 1.8rem;
+  }
+
+  body.landing-page .landing-card {
+    padding: 2.1rem 1.4rem;
+  }
 }
 
 /* Accessibility */

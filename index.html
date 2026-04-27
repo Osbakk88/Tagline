@@ -11,83 +11,35 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body class="landing-page">
-    <div style="position: absolute; top: 1rem; right: 1rem">
+    <div class="landing-lang">
       <button class="lang-toggle" aria-label="Switch Language">NO</button>
     </div>
-    <div
-      class="container"
-      style="
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        min-height: 100vh;
-      "
-    >
-      <header
-        style="
-          text-align: center;
-          border: none;
-          margin-bottom: var(--space-xl);
-          background: transparent;
-          box-shadow: none;
-        "
-      >
-        <div
-          class="brand"
-          style="justify-content: center; margin-bottom: var(--space-md)"
-        >
+    <div class="container landing-shell">
+      <header class="landing-header">
+        <div class="brand landing-brand">
           <img src="assets/logo-icon.svg" alt="" width="64" height="64" />
-          <span class="brand__text" style="text-align: left">
-            <span
-              class="brand__name"
-              data-i18n="app.title"
-              style="font-size: 2.5rem"
-              >Tagline</span
-            >
-            <span
-              class="brand__tagline"
-              data-i18n="app.slogan"
-              style="font-size: 1.2rem"
+          <span class="brand__text landing-brand-text">
+            <span class="brand__name" data-i18n="app.title">Tagline</span>
+            <span class="brand__tagline" data-i18n="app.slogan"
               >Alt samlet. Ett sted.</span
             >
           </span>
         </div>
-        <p
-          style="
-            margin: 0 auto;
-            font-size: 1.5rem;
-            color: var(--color-text-muted);
-          "
-          data-i18n="index.subtitle"
-        >
+        <p class="landing-subtitle" data-i18n="index.subtitle">
           A calm, simple way to manage health appointments and notes.
         </p>
       </header>
 
-      <main style="text-align: center">
-        <div
-          class="card"
-          style="max-width: 600px; margin: 0 auto; padding: var(--space-xl)"
-        >
-          <h2 data-i18n="index.welcome" style="margin-bottom: var(--space-md)">
-            Welcome
-          </h2>
-          <p
-            data-i18n="index.description"
-            style="font-size: 1.1rem; margin-bottom: var(--space-lg)"
-          >
+      <main class="landing-main">
+        <div class="card landing-card">
+          <h2 data-i18n="index.welcome">Welcome</h2>
+          <p data-i18n="index.description" class="landing-description">
             Tagline helps you keep track of appointments, notes, and documents
             without the stress. No clutter, just what you need.
           </p>
           <div>
-            <a
-              href="dashboard.html"
-              class="btn"
-              style="font-size: 1.2rem; padding: 1rem 2.5rem"
-              ><i
-                class="fa-solid fa-arrow-right-to-bracket"
-                style="margin-right: 0.5rem"
-              ></i>
+            <a href="dashboard.html" class="btn landing-cta"
+              ><i class="fa-solid fa-arrow-right-to-bracket"></i>
               <span data-i18n="index.open">Open My List</span></a
             >
           </div>

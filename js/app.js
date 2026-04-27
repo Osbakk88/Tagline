@@ -33,9 +33,36 @@ document.addEventListener("DOMContentLoaded", () => {
   const nav = document.querySelector("nav");
 
   if (hamburger && nav) {
+    const setMenuState = (isOpen) => {
+      hamburger.classList.toggle("active", isOpen);
+      nav.classList.toggle("active", isOpen);
+      hamburger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    };
+
     hamburger.addEventListener("click", () => {
-      hamburger.classList.toggle("active");
-      nav.classList.toggle("active");
+      const isOpen = !nav.classList.contains("active");
+      setMenuState(isOpen);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && nav.classList.contains("active")) {
+        setMenuState(false);
+        hamburger.focus();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      const clickedInsideMenu = nav.contains(event.target);
+      const clickedHamburger = hamburger.contains(event.target);
+      if (!clickedInsideMenu && !clickedHamburger && nav.classList.contains("active")) {
+        setMenuState(false);
+      }
+    });
+
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        setMenuState(false);
+      });
     });
   }
 
