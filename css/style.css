@@ -86,8 +86,16 @@ body {
   color: var(--color-text);
   background-color: var(--color-bg);
   background-image:
-    radial-gradient(circle at top right, rgba(242, 211, 153, 0.3), transparent 32%),
-    radial-gradient(circle at bottom left, rgba(93, 64, 55, 0.06), transparent 36%);
+    radial-gradient(
+      circle at top right,
+      rgba(242, 211, 153, 0.3),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(93, 64, 55, 0.06),
+      transparent 36%
+    );
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   display: flex;
@@ -97,8 +105,16 @@ body {
 body.landing-page {
   background-color: #2f1f1b;
   background-image:
-    radial-gradient(circle at 15% 12%, rgba(255, 220, 170, 0.2), transparent 34%),
-    radial-gradient(circle at 90% 8%, rgba(255, 247, 236, 0.12), transparent 28%),
+    radial-gradient(
+      circle at 15% 12%,
+      rgba(255, 220, 170, 0.2),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 90% 8%,
+      rgba(255, 247, 236, 0.12),
+      transparent 28%
+    ),
     linear-gradient(145deg, #3b2722 0%, #5f4035 45%, #8f6548 100%);
 }
 
@@ -114,8 +130,16 @@ body.landing-page .card {
 body.dark-mode.landing-page {
   background-color: #102a43;
   background-image:
-    radial-gradient(circle at 14% 15%, rgba(77, 182, 172, 0.2), transparent 32%),
-    radial-gradient(circle at 85% 10%, rgba(240, 244, 248, 0.08), transparent 24%),
+    radial-gradient(
+      circle at 14% 15%,
+      rgba(77, 182, 172, 0.2),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(240, 244, 248, 0.08),
+      transparent 24%
+    ),
     linear-gradient(145deg, #0f1d31 0%, #14263e 42%, #1c2f45 100%);
 }
 
@@ -174,7 +198,11 @@ header::before {
   width: 360px;
   height: 360px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--color-header-glow), transparent 68%);
+  background: radial-gradient(
+    circle,
+    var(--color-header-glow),
+    transparent 68%
+  );
 }
 
 header::after {
@@ -258,7 +286,10 @@ p {
   font-weight: var(--font-weight-medium);
   cursor: pointer;
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
   box-shadow: var(--shadow-sm);
   min-height: 48px; /* Accessibility standard */
 }
@@ -454,7 +485,10 @@ select:focus {
   border-radius: 20px;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .lang-toggle:hover {
