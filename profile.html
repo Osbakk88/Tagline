@@ -201,16 +201,6 @@
           />
 
           <div style="margin-top: var(--space-md); text-align: right">
-            <span
-              id="save-message"
-              style="
-                color: var(--color-primary);
-                margin-right: var(--space-sm);
-                opacity: 0;
-                transition: opacity 0.3s;
-              "
-              >Saved!</span
-            >
             <button type="submit" class="btn" data-i18n="btn.save">
               Save Profile
             </button>
@@ -224,7 +214,6 @@
       import { I18n } from "./js/modules/i18n.js";
 
       const form = document.getElementById("profile-form");
-      const msg = document.getElementById("save-message");
 
       function load() {
         const data = Profile.get();
@@ -249,11 +238,14 @@
           emergencyPhone: document.getElementById("emergencyPhone").value,
         });
 
-        msg.style.opacity = "1";
-        msg.textContent = I18n.get("profile.saved");
-        setTimeout(() => {
-          msg.style.opacity = "0";
-        }, 2000);
+        window.dispatchEvent(
+          new CustomEvent("appMessage", {
+            detail: {
+              messageKey: "profile.saved",
+              variant: "success",
+            },
+          })
+        );
       });
 
       // Re-render when language changes (though form values stay)

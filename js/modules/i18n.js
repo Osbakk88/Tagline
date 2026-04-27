@@ -26,6 +26,12 @@ const translations = {
     "btn.close": "Close",
     "btn.save": "Save",
     loading: "Loading...",
+    "storage.error.read":
+      "Could not read saved data from this device. Please refresh the page.",
+    "storage.error.save":
+      "Could not save your changes on this device. Check available storage and try again.",
+    "storage.error.remove":
+      "Could not delete saved data on this device. Please try again.",
 
     // Index
     "index.subtitle":
@@ -205,6 +211,7 @@ const translations = {
     "settings.confirm_clear":
       "WARNING: This will delete ALL your appointments, notes, and documents. This cannot be undone. Are you sure?",
     "settings.alert_cleared": "All data has been cleared.",
+    "settings.alert_exported": "Backup exported successfully.",
     "settings.alert_imported": "Data imported successfully.",
     "settings.alert_import_failed":
       "Could not import backup file. Please check that the file is valid.",
@@ -232,6 +239,12 @@ const translations = {
     "btn.close": "Lukk",
     "btn.save": "Lagre",
     loading: "Laster...",
+    "storage.error.read":
+      "Kunne ikke lese lagrede data fra denne enheten. Prøv å laste siden på nytt.",
+    "storage.error.save":
+      "Kunne ikke lagre endringene på denne enheten. Sjekk tilgjengelig lagringsplass og prøv igjen.",
+    "storage.error.remove":
+      "Kunne ikke slette lagrede data på denne enheten. Prøv igjen.",
 
     // Index
     "index.subtitle":
@@ -414,6 +427,7 @@ const translations = {
     "settings.confirm_clear":
       "ADVARSEL: Dette vil slette ALLE dine avtaler, notater og dokumenter. Dette kan ikke angres. Er du sikker?",
     "settings.alert_cleared": "All data er slettet.",
+    "settings.alert_exported": "Backup ble eksportert.",
     "settings.alert_imported": "Data ble importert.",
     "settings.alert_import_failed":
       "Kunne ikke importere backup-fil. Sjekk at filen er gyldig.",

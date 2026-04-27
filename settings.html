@@ -211,6 +211,8 @@
       import { Storage } from "./js/modules/storage.js";
       import { I18n } from "./js/modules/i18n.js";
 
+      const PENDING_MESSAGE_KEY = "tagline_app_message";
+
       const BACKUP_KEYS = [
         "huskelista_theme",
         "tagline_language",
@@ -283,6 +285,15 @@
           link.click();
           document.body.removeChild(link);
           URL.revokeObjectURL(url);
+
+          window.dispatchEvent(
+            new CustomEvent("appMessage", {
+              detail: {
+                messageKey: "settings.alert_exported",
+                variant: "success",
+              },
+            })
+          );
         });
 
       const importBtn = document.getElementById("import-data-btn");
@@ -320,10 +331,23 @@
             I18n.setLanguage(importedLang);
           }
 
-          alert(I18n.get("settings.alert_imported"));
+          sessionStorage.setItem(
+            PENDING_MESSAGE_KEY,
+            JSON.stringify({
+              messageKey: "settings.alert_imported",
+              variant: "success",
+            })
+          );
           window.location.reload();
         } catch (error) {
-          alert(I18n.get("settings.alert_import_failed"));
+          window.dispatchEvent(
+            new CustomEvent("appMessage", {
+              detail: {
+                messageKey: "settings.alert_import_failed",
+                variant: "error",
+              },
+            })
+          );
         } finally {
           importFile.value = "";
         }
