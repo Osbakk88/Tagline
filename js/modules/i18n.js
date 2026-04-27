@@ -436,7 +436,7 @@ export const I18n = {
       this.apply();
       // Dispatch event so other components can react if needed
       window.dispatchEvent(
-        new CustomEvent("languageChanged", { detail: { language: lang } })
+        new CustomEvent("languageChanged", { detail: { language: lang } }),
       );
     }
   },

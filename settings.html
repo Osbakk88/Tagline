@@ -257,31 +257,33 @@
           }
         });
 
-      document.getElementById("export-data-btn").addEventListener("click", () => {
-        const payload = {
-          app: "tagline",
-          version: 1,
-          exportedAt: new Date().toISOString(),
-          data: {},
-        };
+      document
+        .getElementById("export-data-btn")
+        .addEventListener("click", () => {
+          const payload = {
+            app: "tagline",
+            version: 1,
+            exportedAt: new Date().toISOString(),
+            data: {},
+          };
 
-        BACKUP_KEYS.forEach((key) => {
-          payload.data[key] = Storage.get(key);
+          BACKUP_KEYS.forEach((key) => {
+            payload.data[key] = Storage.get(key);
+          });
+
+          const backupJson = JSON.stringify(payload, null, 2);
+          const blob = new Blob([backupJson], { type: "application/json" });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          const dateStamp = new Date().toISOString().slice(0, 10);
+
+          link.href = url;
+          link.download = `tagline-backup-${dateStamp}.json`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
         });
-
-        const backupJson = JSON.stringify(payload, null, 2);
-        const blob = new Blob([backupJson], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        const dateStamp = new Date().toISOString().slice(0, 10);
-
-        link.href = url;
-        link.download = `tagline-backup-${dateStamp}.json`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-      });
 
       const importBtn = document.getElementById("import-data-btn");
       const importFile = document.getElementById("import-data-file");
