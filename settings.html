@@ -149,6 +149,43 @@
         <p data-i18n="settings.data_info">
           All your data is stored locally on this device.
         </p>
+        <div class="flex-row mt-md" style="flex-wrap: wrap">
+          <button
+            id="export-data-btn"
+            class="btn btn--secondary"
+            data-i18n="settings.btn.export"
+          >
+            Export Data
+          </button>
+          <button
+            id="import-data-btn"
+            class="btn btn--secondary"
+            data-i18n="settings.btn.import"
+          >
+            Import Data
+          </button>
+          <input
+            id="import-data-file"
+            type="file"
+            accept="application/json"
+            style="display: none"
+          />
+        </div>
+        <p
+          class="mt-sm"
+          style="color: var(--color-text-muted)"
+          data-i18n="settings.backup_info"
+        >
+          Backup includes appointments, medications, symptoms, vitals, contacts,
+          notes, documents, profile, language and theme settings.
+        </p>
+        <p
+          style="color: var(--color-text-muted)"
+          data-i18n="settings.backup_privacy"
+        >
+          Keep backup files in a safe place, as they may contain sensitive
+          health information.
+        </p>
         <div style="margin-top: var(--space-md)">
           <button
             id="clear-data-btn"
@@ -173,6 +210,19 @@
     <script type="module">
       import { Storage } from "./js/modules/storage.js";
       import { I18n } from "./js/modules/i18n.js";
+
+      const BACKUP_KEYS = [
+        "huskelista_theme",
+        "tagline_language",
+        "huskelista_appointments",
+        "huskelista_medications",
+        "huskelista_symptoms",
+        "huskelista_vitals",
+        "huskelista_contacts",
+        "huskelista_notes",
+        "huskelista_documents",
+        "huskelista_profile",
+      ];
 
       // Language Selector
       const langSelect = document.getElementById("language-select");
@@ -206,6 +256,76 @@
             window.location.href = "index.html";
           }
         });
+
+      document.getElementById("export-data-btn").addEventListener("click", () => {
+        const payload = {
+          app: "tagline",
+          version: 1,
+          exportedAt: new Date().toISOString(),
+          data: {},
+        };
+
+        BACKUP_KEYS.forEach((key) => {
+          payload.data[key] = Storage.get(key);
+        });
+
+        const backupJson = JSON.stringify(payload, null, 2);
+        const blob = new Blob([backupJson], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        const dateStamp = new Date().toISOString().slice(0, 10);
+
+        link.href = url;
+        link.download = `tagline-backup-${dateStamp}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      });
+
+      const importBtn = document.getElementById("import-data-btn");
+      const importFile = document.getElementById("import-data-file");
+
+      importBtn.addEventListener("click", () => {
+        importFile.click();
+      });
+
+      importFile.addEventListener("change", async (event) => {
+        const file = event.target.files?.[0];
+        if (!file) {
+          return;
+        }
+
+        try {
+          const text = await file.text();
+          const parsed = JSON.parse(text);
+
+          if (!parsed || typeof parsed !== "object" || !parsed.data) {
+            throw new Error("invalid-backup");
+          }
+
+          BACKUP_KEYS.forEach((key) => {
+            if (Object.prototype.hasOwnProperty.call(parsed.data, key)) {
+              Storage.set(key, parsed.data[key]);
+            }
+          });
+
+          const importedTheme = Storage.get("huskelista_theme");
+          document.body.classList.toggle("dark-mode", importedTheme === "dark");
+
+          const importedLang = Storage.get("tagline_language");
+          if (importedLang === "en" || importedLang === "no") {
+            I18n.setLanguage(importedLang);
+          }
+
+          alert(I18n.get("settings.alert_imported"));
+          window.location.reload();
+        } catch (error) {
+          alert(I18n.get("settings.alert_import_failed"));
+        } finally {
+          importFile.value = "";
+        }
+      });
     </script>
     <script type="module" src="js/app.js"></script>
   </body>

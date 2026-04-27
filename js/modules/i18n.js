@@ -193,12 +193,21 @@ const translations = {
     "settings.dark_mode": "Dark Mode",
     "settings.data_management": "Data Management",
     "settings.data_info": "All your data is stored locally on this device.",
+    "settings.backup_info":
+      "Backup includes appointments, medications, symptoms, vitals, contacts, notes, documents, profile, language and theme settings.",
+    "settings.backup_privacy":
+      "Keep backup files in a safe place, as they may contain sensitive health information.",
+    "settings.btn.export": "Export Data",
+    "settings.btn.import": "Import Data",
     "settings.btn.clear": "Clear All Data",
     "settings.about": "About",
     "settings.about_text": "A simple tool for managing health logistics.",
     "settings.confirm_clear":
       "WARNING: This will delete ALL your appointments, notes, and documents. This cannot be undone. Are you sure?",
     "settings.alert_cleared": "All data has been cleared.",
+    "settings.alert_imported": "Data imported successfully.",
+    "settings.alert_import_failed":
+      "Could not import backup file. Please check that the file is valid.",
   },
   no: {
     // Navigation
@@ -393,12 +402,21 @@ const translations = {
     "settings.dark_mode": "Mørk modus",
     "settings.data_management": "Datahåndtering",
     "settings.data_info": "All data lagres lokalt på denne enheten.",
+    "settings.backup_info":
+      "Backup inkluderer avtaler, medisiner, symptomer, målinger, kontakter, notater, dokumenter, profil, språk og temainnstillinger.",
+    "settings.backup_privacy":
+      "Oppbevar backup-filer trygt, siden de kan inneholde sensitiv helseinformasjon.",
+    "settings.btn.export": "Eksporter data",
+    "settings.btn.import": "Importer data",
     "settings.btn.clear": "Slett all data",
     "settings.about": "Om",
     "settings.about_text": "Et enkelt verktøy for å håndtere helselogistikk.",
     "settings.confirm_clear":
       "ADVARSEL: Dette vil slette ALLE dine avtaler, notater og dokumenter. Dette kan ikke angres. Er du sikker?",
     "settings.alert_cleared": "All data er slettet.",
+    "settings.alert_imported": "Data ble importert.",
+    "settings.alert_import_failed":
+      "Kunne ikke importere backup-fil. Sjekk at filen er gyldig.",
   },
 };
 
