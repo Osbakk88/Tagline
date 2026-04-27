@@ -54,7 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("click", (event) => {
       const clickedInsideMenu = nav.contains(event.target);
       const clickedHamburger = hamburger.contains(event.target);
-      if (!clickedInsideMenu && !clickedHamburger && nav.classList.contains("active")) {
+      if (
+        !clickedInsideMenu &&
+        !clickedHamburger &&
+        nav.classList.contains("active")
+      ) {
         setMenuState(false);
       }
     });
