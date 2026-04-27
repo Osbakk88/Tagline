@@ -29,39 +29,39 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Hamburger Menu Toggle
-  const hamburger = document.querySelector('.hamburger');
-  const nav = document.querySelector('nav');
+  const hamburger = document.querySelector(".hamburger");
+  const nav = document.querySelector("nav");
 
   if (hamburger && nav) {
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      nav.classList.toggle('active');
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("active");
+      nav.classList.toggle("active");
     });
   }
 
   // Language Toggle
-  const langToggle = document.querySelector('.lang-toggle');
-  
+  const langToggle = document.querySelector(".lang-toggle");
+
   function updateLangButton() {
     if (langToggle) {
       const currentLang = I18n.currentLang;
       // If current is 'en', button should show 'NO' (switch to Norwegian)
       // If current is 'no', button should show 'EN' (switch to English)
-      langToggle.textContent = currentLang === 'en' ? 'NO' : 'EN';
+      langToggle.textContent = currentLang === "en" ? "NO" : "EN";
     }
   }
 
   if (langToggle) {
     updateLangButton();
-    
-    langToggle.addEventListener('click', () => {
-      const newLang = I18n.currentLang === 'en' ? 'no' : 'en';
+
+    langToggle.addEventListener("click", () => {
+      const newLang = I18n.currentLang === "en" ? "no" : "en";
       I18n.setLanguage(newLang);
       updateLangButton();
     });
-    
+
     // Listen for language changes from other sources (e.g. settings page)
-    window.addEventListener('languageChanged', () => {
+    window.addEventListener("languageChanged", () => {
       updateLangButton();
     });
   }

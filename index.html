@@ -4,35 +4,92 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tagline - Simple Health Logistics</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
-    <div style="position: absolute; top: 1rem; right: 1rem;">
+  <body class="landing-page">
+    <div style="position: absolute; top: 1rem; right: 1rem">
       <button class="lang-toggle" aria-label="Switch Language">NO</button>
     </div>
-    <div class="container" style="display: flex; flex-direction: column; justify-content: center; min-height: 100vh;">
-      <header style="text-align: center; border: none; margin-bottom: var(--space-xl); background: transparent; box-shadow: none;">
-        <div class="brand" style="justify-content: center; margin-bottom: var(--space-md);">
-            <img src="assets/logo-icon.svg" alt="" width="64" height="64" />
-            <span class="brand__text" style="text-align: left;">
-                <span class="brand__name" data-i18n="app.title" style="font-size: 2.5rem;">Tagline</span>
-                <span class="brand__tagline" data-i18n="app.slogan" style="font-size: 1.2rem;">Alt samlet. Ett sted.</span>
-            </span>
+    <div
+      class="container"
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 100vh;
+      "
+    >
+      <header
+        style="
+          text-align: center;
+          border: none;
+          margin-bottom: var(--space-xl);
+          background: transparent;
+          box-shadow: none;
+        "
+      >
+        <div
+          class="brand"
+          style="justify-content: center; margin-bottom: var(--space-md)"
+        >
+          <img src="assets/logo-icon.svg" alt="" width="64" height="64" />
+          <span class="brand__text" style="text-align: left">
+            <span
+              class="brand__name"
+              data-i18n="app.title"
+              style="font-size: 2.5rem"
+              >Tagline</span
+            >
+            <span
+              class="brand__tagline"
+              data-i18n="app.slogan"
+              style="font-size: 1.2rem"
+              >Alt samlet. Ett sted.</span
+            >
+          </span>
         </div>
-        <p style="margin: 0 auto; font-size: 1.5rem; color: var(--color-text-muted);" data-i18n="index.subtitle">
+        <p
+          style="
+            margin: 0 auto;
+            font-size: 1.5rem;
+            color: var(--color-text-muted);
+          "
+          data-i18n="index.subtitle"
+        >
           A calm, simple way to manage health appointments and notes.
         </p>
       </header>
 
-      <main style="text-align: center;">
-        <div class="card" style="max-width: 600px; margin: 0 auto; padding: var(--space-xl);">
-          <h2 data-i18n="index.welcome" style="margin-bottom: var(--space-md);">Welcome</h2>
-          <p data-i18n="index.description" style="font-size: 1.1rem; margin-bottom: var(--space-lg);">
-            Tagline helps you keep track of appointments, notes, and documents without the stress. No clutter, just what you need.
+      <main style="text-align: center">
+        <div
+          class="card"
+          style="max-width: 600px; margin: 0 auto; padding: var(--space-xl)"
+        >
+          <h2 data-i18n="index.welcome" style="margin-bottom: var(--space-md)">
+            Welcome
+          </h2>
+          <p
+            data-i18n="index.description"
+            style="font-size: 1.1rem; margin-bottom: var(--space-lg)"
+          >
+            Tagline helps you keep track of appointments, notes, and documents
+            without the stress. No clutter, just what you need.
           </p>
           <div>
-            <a href="dashboard.html" class="btn" style="font-size: 1.2rem; padding: 1rem 2.5rem;"><i class="fa-solid fa-arrow-right-to-bracket" style="margin-right: 0.5rem;"></i> <span data-i18n="index.open">Open My List</span></a>
+            <a
+              href="dashboard.html"
+              class="btn"
+              style="font-size: 1.2rem; padding: 1rem 2.5rem"
+              ><i
+                class="fa-solid fa-arrow-right-to-bracket"
+                style="margin-right: 0.5rem"
+              ></i>
+              <span data-i18n="index.open">Open My List</span></a
+            >
           </div>
         </div>
       </main>
