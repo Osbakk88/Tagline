@@ -363,7 +363,14 @@
             const fileData = evt.target.result;
             // Basic size check for LocalStorage (approx 5MB limit usually)
             if (fileData.length > 3000000) {
-              alert(I18n.get("documents.alert.too_large"));
+              window.dispatchEvent(
+                new CustomEvent("appMessage", {
+                  detail: {
+                    messageKey: "documents.alert.too_large",
+                    variant: "error",
+                  },
+                }),
+              );
               return;
             }
 

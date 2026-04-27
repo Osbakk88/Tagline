@@ -253,8 +253,14 @@
         .getElementById("clear-data-btn")
         .addEventListener("click", () => {
           if (confirm(I18n.get("settings.confirm_clear"))) {
+            sessionStorage.setItem(
+              PENDING_MESSAGE_KEY,
+              JSON.stringify({
+                messageKey: "settings.alert_cleared",
+                variant: "success",
+              }),
+            );
             localStorage.clear();
-            alert(I18n.get("settings.alert_cleared"));
             window.location.href = "index.html";
           }
         });
